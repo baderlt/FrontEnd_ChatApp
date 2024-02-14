@@ -291,6 +291,7 @@ useEffect(()=>{
 <p className="text-gray-300">Send private photos and messages to a friend</p>
 
 
+
         </div>
         
        
