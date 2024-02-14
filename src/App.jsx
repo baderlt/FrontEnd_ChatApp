@@ -17,6 +17,7 @@ const LazyNewChat = React.lazy(()=>import('./pages/NewChat'))
 const LazyRegister = React.lazy(()=>import("./pages/Reagister"))
 
 function App() {
+let url_Curent=window.location.href;
  const navigate=useNavigate();
  const dispatch=useDispatch();
  const globale_State=useSelector(state=>state.alert.composant);
@@ -52,6 +53,7 @@ check_Auth_User();
 },[])
 
 
+
   return (
     <>
 
@@ -60,23 +62,23 @@ check_Auth_User();
 
   <Routes>
   
-    <Route path='/home'  element={<MiddlewareAuth isAuth={isauth} >
+    <Route path={url_Curent+'/home'}  element={<MiddlewareAuth isAuth={isauth} >
                                       <Suspense fallback={<Loading_App/>} >
                                           <LazyHome/>
                                           </Suspense>
                                </MiddlewareAuth>}/>
 
-    <Route path='/newChat' element={<MiddlewareAuth isAuth={isauth} >
+    <Route path={url_Curent+'/newChat'} element={<MiddlewareAuth isAuth={isauth} >
       <Suspense fallback={<Loading_App/>}>
         <LazyNewChat/>
       </Suspense>
       </MiddlewareAuth>}/>
 
-     <Route path='/Login' element={ <MiddleWarePrevent isAuth={isauth}  >
+     <Route path={url_Curent+'/Login'} element={ <MiddleWarePrevent isAuth={isauth}  >
         <LazyLogin/>
      </MiddleWarePrevent> 
      }/>
-      <Route path='/Register' element={<Suspense fallback={<Loading_App/>} >
+      <Route path={url_Curent+'/Register'} element={<Suspense fallback={<Loading_App/>} >
        <LazyRegister/>
      </Suspense> }/>
 

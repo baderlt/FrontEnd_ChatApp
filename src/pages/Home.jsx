@@ -30,7 +30,7 @@ const Home = () => {
      //////////////////////////////////////////////// socket Io 
     useEffect(()=>{
       const connection_server =async ()=>{
-        const newSocket=await io('http://localhost:3000');
+        const newSocket=await io('https://socket-y0xj.onrender.com/');
         SetSocket(newSocket);
       }
     connection_server()

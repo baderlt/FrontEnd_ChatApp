@@ -110,16 +110,17 @@ const Filter_Notification = (senderId)=>{
         ...user_info.data,
         id_Chat: chats[i].chat?._id,
         created_chat: chats[i].chat?.createdAt,
-        last_message:chats[i].lastMessage
+        last_message:chats[i]?.lastMessage
         
       });
     }
+
     all_chats.sort((a, b) => {
-      const dateA = new Date(a.last_message.createdAt);
-      const dateB = new Date(b.last_message.createdAt);
+      const dateA = new Date(a.last_message?.createdAt) ;
+      const dateB = new Date(b.last_message?.createdAt)  ;
       return  dateB - dateA ;
     });
- 
+
     setfilter_chat(all_chats);
     setchat_Data(all_chats);
   };
@@ -251,7 +252,7 @@ const Filter_Notification = (senderId)=>{
                         {Edit_message_length( Count_Messages(item._id) ? Count_Messages(item._id): item.last_message ? `${item.last_message?.SenderId === item._id? "":"You :"} ${item.last_message?.message}`:"Send the first Message... "  )}
                  
                       </p>
-                {console.log(item.last_message)}
+      
                         {nbr_Notifications(item._id)? <span className="text-white pl-2 pr-2 h-6  rounded-full   bg-green-600 text-center" style={{fontSize:14}}>{nbr_Notifications(item._id)}</span>
                         :<span className={`text-white text-xm pl-4 ${item.last_message?.SenderId === item._id? "hidden":""}`} ><FontAwesomeIcon color="green" icon={faPaperPlane} /></span>}
                      
