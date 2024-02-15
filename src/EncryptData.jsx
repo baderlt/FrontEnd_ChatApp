@@ -7,7 +7,7 @@ import CryptoJS from 'crypto-js';
       let decryptedData_=JSON.parse(decryptedData);
       return decryptedData_;
     } catch (error) {
-      console.error('Decryption Error:', error);
+      // console.error('Decryption Error:', error);
       return 'Decryption failed';
     }
   };
