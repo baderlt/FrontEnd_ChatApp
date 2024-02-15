@@ -13,9 +13,11 @@ import { useContext } from "react";
 import { OnlinUserContext } from "../pages/Home";
 import { useNavigate } from "react-router-dom";
 import UseGetMessages from "../useGetMessages";
+import Messages_Loding from "./Messages_Loding";
 export default function Chat_Box(props) {
   const colors = [null, "green", "blue", "white", "black", "red"];
   const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
+  let messages_loading=true;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
@@ -32,6 +34,7 @@ export default function Chat_Box(props) {
   useEffect(() => {
     SetMessages(All_messages_);
     SetFilterMessages(All_messages_);
+    // messages_loading=!messages_loading;
   }, [All_messages_]);
 
   ///////////////////////
@@ -344,7 +347,7 @@ export default function Chat_Box(props) {
                             </div>
                           </div>
                         ))
-                      : ""}
+                      : messages_loading ?<Messages_Loding/>:FilterMessages && FilterMessages?.length == 0 ?"Sned the first message to ":""}
                   </div>
                 </div>
               </div>
