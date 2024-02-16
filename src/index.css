@@ -3,3 +3,18 @@
 @tailwind utilities;
 
 
+@layer{
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kdam+Thmor+Pro&family=Pacifico&display=swap');
+    *{
+        font-family: "Kdam Thmor Pro", sans-serif;
+      }
+ 
+ 
+      .custom{
+        display: flex;
+        flex-flow:column;
+        height: 100vh !important;
+        position: relative;
+     
+    }
+}
