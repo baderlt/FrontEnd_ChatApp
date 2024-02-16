@@ -70,8 +70,8 @@ export default function Chat_Box(props) {
   }, [Socket, props.info_chat]);
 
   useLayoutEffect(() => {
-    // if (chatRef.current)
-    //   chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    if (chatRef.current)
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
     // chatRef.current?.scrollIntoView({behavior:'smooth'})
   }, [Messages, newMessage]);
 
