@@ -14,7 +14,10 @@ import { OnlinUserContext } from "../pages/Home";
 import { useNavigate } from "react-router-dom";
 import UseGetMessages from "../useGetMessages";
 import Messages_Loding from "./Messages_Loding";
+import Default_Page from "./Default_Chat_box_page";
+import DarkMode from "./togle_dark";
 export default function Chat_Box(props) {
+  const [toggle, setToggle] = useState(false);
   const colors = [null, "green", "blue", "white", "black", "red"];
   const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
   let messages_loading = true;
@@ -113,8 +116,19 @@ export default function Chat_Box(props) {
   return (
     <>
       {props?.info_chat ? (
-        <div className="custom ">
-          <div className=" flex flex-row   h-12 w-full top-12 bg-white shadow-x border-b-gray-200 border-2 mr-4">
+        <div
+          className={`h-screen  main  ${
+            toggle
+              ? "bg-[url('bg_chat3_dark.png')]"
+              : "bg-[url('bg_chat3.png')]"
+          }   mr-4  `}
+          style={{ width: "100%", height: "100vh" }}
+        >
+          <div
+            className={`${
+              toggle ? "header_dark" : "bg-white"
+            }  flex flex-row w-full h-12  shadow-xl border-b-gary-900 mr-4`}
+          >
             <div
               className="flex basis-[15%]  md:basis-[10%] lg:basis-[6%] mt-1 ml-2 md:ml-4 lg:ml-6  mb-1"
               onClick={() => {
@@ -144,13 +158,16 @@ export default function Chat_Box(props) {
                 />
               )}
             </div>
-            <div className="  basis-[45%] md:basis-[30%] lg:basis-[50%] mt-1 mb:mt-0   text-gray-900">
+            <div
+              className={`basis-[45%] md:basis-[30%] lg:basis-[50%] mt-1 mb:mt-0  ${
+                !toggle ? "text-gray-900" : "text-white"
+              }`}
+            >
               <div>
                 <b>{capitalizeFirstLetter(props.info_chat.name)}</b>
               </div>
               <div>
                 <p className="text-green-600" style={{ fontSize: 10 }}>
-                  {" "}
                   {onlineUser.some(
                     (user) => user.userId === props?.info_chat?._id
                   ) ? (
@@ -163,7 +180,7 @@ export default function Chat_Box(props) {
             </div>
             <div className="flex flex-row  basis-[10%] md:basis-[50%] lg:basis-[30%] ">
               <div className="flex-initial w-full r-1 pt-2  mr-2 ">
-                <div className="inline-flex w-full pl-6 pr-0 bg-white">
+                <div className="inline-flex w-full pl-6 pr-0 ">
                   <span class="inline-flex  items-center px-3  hover:bg-purple-200 text-sm text-gray-900 bg-white border border-r-0 border-gray-300 rounded-l-md dark:bg-white dark:text-gray-700 dark:border-gray-600">
                     <i className="">
                       <FontAwesomeIcon icon={faSearch} />
@@ -187,13 +204,19 @@ export default function Chat_Box(props) {
             <button className="basis-[10%] md:basis-[5%] lg:basis-[4%]    hover:bg-purple-200 text-center mt-1.5 pt-1.5 mb-1 pb-1.5 rounded-md mr-6 ">
               <MoreIcon />
             </button>
+            <DarkMode toggle={() => setToggle(!toggle)} />
           </div>
-
           <div
-            class="bg-[url('bg_chat3.png')]  mb-28  px-4  grid grid-cols-12 gap-y-2 overflow-y-auto  w-full "
-            ref={chatRef}
+            class="flex flex-col w-full flex-auto  mb-0"
+            style={{ height: "calc(100% - 100px)" }}
           >
-          <div className="ml-[565%]  w-full  flex flex-col mt-2">    {Number.isInteger(Number(props.info_chat?.pic)) ? (
+            <div class="flex flex-col flex-auto flex-shrink-0 rounded-b-lg  h-full pr-4 pl-4">
+              <div
+                class="flex flex-col h-full  mb-2 overflow-y-auto overflow-x-hidden   "
+                ref={chatRef}
+              >
+                <div class="flex flex-col h-full    ">
+                  {/* <div className="ml-[565%]  w-full  flex flex-col mt-2">    {Number.isInteger(Number(props.info_chat?.pic)) ? (
                 <AvatarReactjs
                   name={props.info_chat?.name ? props.info_chat?.name : "user"}
                   fontSize={"small"}
@@ -216,238 +239,230 @@ export default function Chat_Box(props) {
                 />
               )}
               <h2>{props?.info_chat?.name}</h2>
-              </div>
+              </div> */}
+                  <div class="grid grid-cols-12 gap-y-2  ">
+                    {FilterMessages && FilterMessages.length >= 1 ? (
+                      FilterMessages.map((item, index) => (
+                        // {return   item.SenderId != Info_User._id ?
+                        <div
+                          key={index}
+                          className={
+                            item.SenderId != Info_User._id
+                              ? " col-start-1 col-end-11 p-0 rounded-lg  "
+                              : "col-start-3 col-end-13 p-0 rounded-lg "
+                          }
+                        >
+                          <div
+                            className={`${
+                              getDayOrDate(
+                                FilterMessages[index - 1]?.createdAt
+                              ) == getDayOrDate(item.createdAt)
+                                ? "hidden"
+                                : ""
+                            }  ${
+                              item.SenderId != Info_User._id
+                                ? "text-right"
+                                : "  w-[100%]"
+                            }  `}
+                          >
+                            <div
+                              className={`${
+                                toggle
+                                  ? " bg-gray-900 text-gray-200"
+                                  : " bg-gray-200 text-gray-700"
+                              } rounded-lg w-48 text-center ${
+                                item.SenderId != Info_User._id
+                                  ? "ml-[50%]"
+                                  : " ml-[30%]"
+                              } mb-1.5 `}
+                            >
+                              {" "}
+                              {getDayOrDate(item.createdAt)}
+                            </div>
+                          </div>
+                          <div
+                            className={
+                              item.SenderId != Info_User._id
+                                ? "flex flex-row items-center"
+                                : "flex items-center justify-start flex-row-reverse "
+                            }
+                          >
+                            {item.SenderId != Info_User._id ? (
+                              <div
+                                className={`${
+                                  FilterMessages[index - 1]?.SenderId !==
+                                    item.SenderId ||
+                                  getDayOrDate(
+                                    FilterMessages[index - 1]?.createdAt
+                                  ) != getDayOrDate(item.createdAt)
+                                    ? "flex items-center justify-center   flex-shrink-0 "
+                                    : ` invisible `
+                                } `}
+                              >
+                                {Number.isInteger(
+                                  Number(props.info_chat?.pic)
+                                ) ? (
+                                  <AvatarReactjs
+                                    name={
+                                      props.info_chat?.name
+                                        ? props.info_chat?.name
+                                        : "user"
+                                    }
+                                    fontSize={"small"}
+                                    backgroundColor={
+                                      Number.isInteger(
+                                        Number(props.info_chat?.pic)
+                                      )
+                                        ? colors[props.info_chat?.pic]
+                                        : "red"
+                                    }
+                                    fontColor={
+                                      props.info_chat?.pic == 3
+                                        ? "black"
+                                        : "azure"
+                                    }
+                                    width={"35px"}
+                                    height={"35px"}
+                                  />
+                                ) : (
+                                  <AvatarReactjs
+                                    name={
+                                      props.info_chat?.name
+                                        ? props.info_chat?.name
+                                        : "user"
+                                    }
+                                    fontSize={"small"}
+                                    src={UserProfilePic}
+                                    width={"35px"}
+                                    height={"35px"}
+                                  />
+                                )}
+                              </div>
+                            ) : (
+                              ""
+                            )}
 
-            {FilterMessages && FilterMessages.length >= 1 ? (
-              FilterMessages.map((item, index) => (
-             
-                <div
-                  key={index}
-                  className={
-                    item.SenderId != Info_User._id
-                      ? " col-start-1 col-end-11 p-0 rounded-lg  "
-                      : "col-start-3 col-end-13 p-0 rounded-lg "
-                  }
-                >
-                  <div
-                    className={`${
-                      getDayOrDate(FilterMessages[index - 1]?.createdAt) ==
-                      getDayOrDate(item.createdAt)
-                        ? "hidden"
-                        : ""
-                    }  ${
-                      item.SenderId != Info_User._id
-                        ? "text-right"
-                        : "  w-[100%]"
-                    }  `}
-                  >
-                    <div
-                      className={`border-2 bg-gray-200 rounded-lg w-48 text-center text-gray-600 ${
-                        item.SenderId != Info_User._id
-                          ? "ml-[50%]"
-                          : " ml-[30%]"
-                      } mb-1.5 `}
-                    >
-                      {" "}
-                      {getDayOrDate(item.createdAt)}
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      item.SenderId != Info_User._id
-                        ? "flex flex-row items-center"
-                        : "flex items-center justify-start flex-row-reverse "
-                    }
-                  >
-                    {item.SenderId != Info_User._id ? (
-                      <div
-                        className={`${
-                          FilterMessages[index - 1]?.SenderId !==
-                            item.SenderId ||
-                          getDayOrDate(FilterMessages[index - 1]?.createdAt) !=
-                            getDayOrDate(item.createdAt)
-                            ? "flex items-center justify-center   flex-shrink-0 "
-                            : ` invisible `
-                        } `}
-                      >
-                        {Number.isInteger(Number(props.info_chat?.pic)) ? (
-                          <AvatarReactjs
-                            name={
-                              props.info_chat?.name
-                                ? props.info_chat?.name
-                                : "user"
-                            }
-                            fontSize={"small"}
-                            backgroundColor={
-                              Number.isInteger(Number(props.info_chat?.pic))
-                                ? colors[props.info_chat?.pic]
-                                : "red"
-                            }
-                            fontColor={
-                              props.info_chat?.pic == 3 ? "black" : "azure"
-                            }
-                            width={"35px"}
-                            height={"35px"}
-                          />
-                        ) : (
-                          <AvatarReactjs
-                            name={
-                              props.info_chat?.name
-                                ? props.info_chat?.name
-                                : "user"
-                            }
-                            fontSize={"small"}
-                            src={UserProfilePic}
-                            width={"35px"}
-                            height={"35px"}
-                          />
-                        )}
-                      </div>
+                            <div
+                              className={
+                                item.SenderId != Info_User._id
+                                  ? ` ml-2 text-sm ${toggle ? "left-dark" :"bg-white"} shadow rounded-lg`
+                                  : ` mr-3 flex flex-row text-sm ${toggle ? "right-dark" :"bg-indigo-100"}   shadow rounded-lg`
+                              }
+                            >
+                              <div className=" py-0.5  px-4 pl-2 ">
+                                <p
+                                  className={` "pb-1 font-mono pr-6  text-base/6 "`}
+                                >
+                                  {item.message}
+                                </p>
+                                <div
+                                  className={`text-gray-500  text-right  ${
+                                    FilterMessages[index + 1]?.SenderId !=
+                                      item.SenderId ||
+                                    (getDayOrDate(
+                                      FilterMessages[index + 1]?.createdAt
+                                    ) != getDayOrDate(item.createdAt) &&
+                                      FilterMessages[index + 1]?.SenderId ==
+                                        item.SenderId)
+                                      ? " pb-4"
+                                      : "hidden"
+                                  }`}
+                                  style={{
+                                    fontSize: 9,
+                                    height: "3px",
+                                  }}
+                                >
+                                  <p className="basis-full pt-0.5   text-right">
+                                    {Time_Date(item.createdAt)} am
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : messages_loading ? (
+                      <Messages_Loding />
+                    ) : FilterMessages && FilterMessages?.length == 0 ? (
+                      `Sned the first message to ${props.info_chat?.name}`
                     ) : (
                       ""
                     )}
-
-                    <div
-                      className={
-                        item.SenderId != Info_User._id
-                          ? " ml-2 text-sm bg-white shadow rounded-lg"
-                          : " mr-3 flex flex-row text-sm bg-indigo-100  shadow rounded-lg"
-                      }
-                    >
-                      <div className=" py-0.5  px-4 pl-2 ">
-                        <p
-                          className={
-                            FilterMessages[index + 1]?.SenderId != item.SenderId
-                              ? "pb-1 font-mono pr-6  text-base/6 pb-0"
-                              : "pb-1 font-mono pr-6  text-base/6 "
-                          }
-                        >
-                          {item.message}
-                        </p>
-                        <div
-                          className={`text-gray-500  text-right  ${
-                            FilterMessages[index + 1]?.SenderId !=
-                              item.SenderId ||
-                            (getDayOrDate(
-                              FilterMessages[index + 1]?.createdAt
-                            ) != getDayOrDate(item.createdAt) &&
-                              FilterMessages[index + 1]?.SenderId ==
-                                item.SenderId)
-                              ? " pb-4"
-                              : "hidden"
-                          }`}
-                          style={{
-                            fontSize: 9,
-                            position: "",
-                            height: "3px",
-                          }}
-                        >
-                          <p className="basis-full pt-0.5   text-right">
-                            {Time_Date(item.createdAt)} am
-                          </p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
-              ))
-            ) : messages_loading ? (
-              <Messages_Loding />
-            ) : FilterMessages && FilterMessages?.length == 0 ? (
-              `Sned the first message to ${props.info_chat?.name}`
-            ) : (
-              ""
-            )}
-          </div>
-
-          <div class=" foot flex flex-row items-center h-16 w-[67%] bg-white  fixed bottom-0   px-4">
-            <div>
-              <button class="flex items-center justify-center text-gray-500 hover:text-gray-900">
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <InputEmoji
-              value={message}
-              onChange={setmessage}
-              onKeyDown={(e) => {
-                e.key == "Enter" && e.target.innerHTML != ""
-                  ? sendMessage()
-                  : "";
-              }}
-              fontFamily="nonito"
-              borderColor="gray"
-              borderRadius={15}
-            />
-            <div class="ml-4">
-              <button
-                onClick={() => {
-                  sendMessage();
-                }}
-                className={`flex items-center justify-center ${
-                  message != ""
-                    ? "bg-indigo-500 hover:bg-indigo-600"
-                    : "bg-gray-300 "
-                } rounded-xl text-black px-4 py-1 flex-shrink-0`}
-                disabled={message == "" ? true : false}
+              </div>
+              <div
+                class={` ${
+                  toggle ? "footer-dark" : " bg-white "
+                } flex flex-row items-center h-16 rounded-xl w-full px-4`}
               >
-                <span>Send</span>
-                <span class="ml-2">
-                  <svg
-                    class="w-4 h-4 transform rotate-45 -mt-px"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div>
+                  <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <InputEmoji
+                  value={message}
+                  onChange={setmessage}
+                  onKeyDown={(e) => {
+                    e.key == "Enter" && e.target.innerHTML != ""
+                      ? sendMessage()
+                      : "";
+                  }}
+                  fontFamily="nonito"
+                  borderColor="gray"
+                  borderRadius={15}
+                />
+                <div class="ml-4">
+                  <button
+                    onClick={() => {
+                      sendMessage();
+                    }}
+                    className={`flex items-center justify-center ${
+                      message != ""
+                        ? "bg-indigo-500 hover:bg-indigo-600"
+                        : "bg-gray-300 "
+                    } rounded-xl text-black px-4 py-1 flex-shrink-0`}
+                    disabled={message == "" ? true : false}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                    ></path>
-                  </svg>
-                </span>
-              </button>
+                    <span>Send</span>
+                    <span class="ml-2">
+                      <svg
+                        class="w-4 h-4 transform rotate-45 -mt-px"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                        ></path>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       ) : (
-        <div
-          className="h-screen  text-center  grid  place-content-center bg-gradient-to-tr from-blue-900 to-purple-900  "
-          style={{
-            backgroundImage: "URL(bg_chat3.png)",
-         
-          }}
-        >
-          <img
-            src="logo_.png"
-            alt="Logo chat"
-            class="animate-pulse ml-16 grid  place-content-center  "
-          />
-          <br />
-
-          <h1 className="text-black font-bold text-xl text-center font-sans ">
-            Your messages
-          </h1>
-          <p className="text-black text-xl flex flex-row gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className="mt-1" width="16" height="16" fill="currentColor" class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 63 63 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5"/>
-</svg>  Send private Files and messages to Your Frends 
-          </p>
-        </div>
+        <Default_Page />
       )}
     </>
   );

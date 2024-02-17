@@ -12,11 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { OnlinUserContext } from "../pages/Home";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
 
 const navigation = [
-  { name: "Chats", href: "/home", current: true },
-  { name: "New Chat", href: "/newChat", current: false },
-  { name: "Support", href: "#", current: false },
+  { name: "Chats", href: "/home/" },
+  { name: "New Chat", href:"/home/NewChat" },
+  { name: "Roumes", href: "/home/roumes", current: false },
 ];
 
 function classNames(...classes) {
@@ -133,19 +134,24 @@ export default function Nav_Bar() {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
+                        // <a
+                        //   key={item.name}
+                        //   onClick={()=><Naviga}
+                        //   href={item.href}
+                        //   className={classNames(
+                        //     item.current
+                        //       ? "bg-gray-900 text-white"
+                        //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        //     "rounded-md px-3 py-2 text-sm font-medium"
+                        //   )}
+                        //   aria-current={item.current ? "page" : undefined}
+                        // >
+                        //   {item.name}
+                        // </a>
+                              <NavLink className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`} to={item.href} >
+                      
+                      {item.name}
+                              </NavLink>
                       ))}
                     </div>
                   </div>

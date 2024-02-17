@@ -7,6 +7,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kdam+Thmor+Pro&family=Pacifico&display=swap');
     *{
         font-family: "Kdam Thmor Pro", sans-serif;
+    
       }
  
  
@@ -15,6 +16,33 @@
         flex-flow:column;
         height: 100vh !important;
         position: relative;
+
      
     }
+    .main{
+      transition: 2s;
+    }
+ 
+    .header_dark{
+       background-color: #1a1a2595;
+       color: white;
+       transition: 2s;
+     
+    }
+    .footer-dark{
+      background-color: #1a1a2595;
+      transition: 2s;
+    }
+    .left-dark{
+      background-color: rgba(255, 255, 255, 0.468);
+      color:white;
+      transition: 2s;
+    }
+    .right-dark{
+      background-color: rgba(231, 173, 255, 0.286);
+      transition: 2s;
+      color:white;
+    }
+
+
 }

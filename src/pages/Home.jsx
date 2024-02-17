@@ -1,17 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Router, Routes, useNavigate } from "react-router-dom";
 import Nav_Bar from "../Compement/Nav_Bar";
-import Chats from "../Compement/Chat";
-import { createContext, useEffect, useState } from "react";
+// import Chats from "../Compement/Chat";
+import React, { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { baseUrl } from "../touls";
 import Drawer_Info from "../Drawer_Profil";
+import NewChat from "../Compement/NewChat";
+import Not_Found from "./Not_Found";
  export const OnlinUserContext = createContext(null);
+//  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 
-
-
+ const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
 const Home = () => {
+
     const dispatch=useDispatch();
     const Info_User = useSelector((state) => state.Auth_check.user_Info);
     const Profile_Drawer = useSelector((state) => state.Drawer_Profile);
@@ -106,7 +109,16 @@ const sendNotificationBeforeUnmount = async () => {
     <OnlinUserContext.Provider value={{onlineUser,notifications,Socket,updateNotification}}>
     <Nav_Bar/>
 
-    <Chats/>    
+    
+
+    
+ <Routes> 
+  
+  <Route path={'/'}  element={ <Lazy_chats/>   }/>
+  <Route path={'/NewChat'}  element={ <NewChat/>   }/>
+  <Route path={'*'}  element={ <Not_Found/>   }/>
+  </Routes> 
+
     </OnlinUserContext.Provider>     
  
     
