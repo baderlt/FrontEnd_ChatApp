@@ -26,7 +26,7 @@ function classNames(...classes) {
 
 export default function Nav_Bar() {
   const dispatch = useDispatch();
-  const colors = [null, "green", "blue", "white", "black", "red"];
+  const colors = [null, "green", "blue", "white", "gray", "red"];
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const Users = useSelector((state) => state.alert.Users);
   const [open_, setOpen] = useState(false);
@@ -107,7 +107,7 @@ export default function Nav_Bar() {
   return (
     <div>
       {/* <Drawer anchor="right" transitionDuration={600} open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)}><Profile User={Info_User}/></Drawer> */}
-      <Disclosure as="nav" className="bg-gray-800 w-full fixed top-0 left-0">
+      <Disclosure as="nav" className="bg-black w-full fixed top-0 left-0">
         {({ open }) => (
           <>
             <div className="mx-auto  px-2 sm:px-6 lg:px-8 ">
@@ -167,7 +167,7 @@ export default function Nav_Bar() {
                         setOpen(!open_);
                       }}
                       type="button"
-                      className="relative  rounded-full bg-gray-800 p-1 mr-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="relative  rounded-full bg-black p-1 mr-4 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <FontAwesomeIcon
                         icon={faMessage}

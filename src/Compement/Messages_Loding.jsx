@@ -1,7 +1,7 @@
 import { Skeleton } from "@mui/material";
 
 const Messages_Loding = () => {
- const Skeltones = Array.from(Array(3)).map(e=><SkelotonElement/>);
+ const Skeltones = Array.from(Array(6)).map(e=><SkelotonElement/>);
  return Skeltones
 };
 export default Messages_Loding;
@@ -21,7 +21,7 @@ function SkelotonElement()
                 <div className="flex flex-nowrap mt-2">
                   <span>
                     {" "}
-                    <Skeleton variant="circular"  width={50} height={50} />
+                    <Skeleton variant="circular"  width={30} height={30} />
                   </span>
                 </div>
               </div>
@@ -31,7 +31,7 @@ function SkelotonElement()
               <div className=" ml-2 text-sm  ">
                 <div className="flex flex-nowrap mt-2">
                   <span className="w-full mr-4 ">
-                    <Skeleton variant="rounded" style={{borderRadius:'12px'}} width={300} height={50} />
+                    <Skeleton variant="rounded" style={{borderRadius:'12px'}} width={300} height={30} />
                   </span>
                 </div>
               </div>
@@ -42,7 +42,7 @@ function SkelotonElement()
               <div className=" mr-3 flex flex-row ">
                 <div className="flex flex-nowrap mt-2">
                   <span className="w-full mr-4 ">
-                    <Skeleton variant="rounded" style={{borderRadius:'12px'}} width={300} height={50} />
+                    <Skeleton variant="rounded" style={{borderRadius:'12px'}} width={300} height={30} />
                   </span>
                 </div>
               </div>

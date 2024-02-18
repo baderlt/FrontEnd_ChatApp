@@ -1,7 +1,7 @@
 import axios from "axios";
-import {
+import React, {
+  Suspense,
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -11,30 +11,29 @@ import { useDispatch, useSelector } from "react-redux";
 import AvatarReactjs from "avatar-reactjs";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import {
-  faCheckDouble,
+
   faPaperPlane,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Loading from "../Loading";
 import Chat_Box from "./chat_box";
 import { baseUrl } from "../touls";
 import { OnlinUserContext } from "../pages/Home";
-import { getDayOrDate } from "./Touls_Date";
+
 import moment from "moment";
-import { Skeleton, Stack } from "@mui/material";
+import Loding_Chat from "./loading_chat";
+import Loading_App from "../Loding/Loading_App";
 
 export const MessageSnded = createContext(null);
 export default function Chats() {
+  const colors = [null, "green", "blue", "white", "gray", "red"];
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const [chat_Data, setchat_Data] = useState();
   const [filter_chat, setfilter_chat] = useState();
   const [selected_item, setSelected_item] = useState();
   const [chat_box, setchat_box] = useState(<Chat_Box />);
   const [loadingChat, SetLoadingChat] = useState(false);
-  const [last_message, setLastMessage] = useState(false);
-  const { onlineUser, notifications, updateNotification } =
-    useContext(OnlinUserContext);
+  const { onlineUser, notifications, updateNotification }=useContext(OnlinUserContext);
 
   const [send, SetSende] = useState();
   const handelMessageSended = () => {
@@ -111,7 +110,7 @@ export default function Chats() {
       })
       .then((res) => {
         Trichat(res.data);
-        SetLoadingChat(true);
+        // SetLoadingChat(true);
       })
       .catch((err) => console.log(err));
   };
@@ -140,6 +139,7 @@ export default function Chats() {
 
     setfilter_chat(all_chats);
     setchat_Data(all_chats);
+    SetLoadingChat(true);
   };
   /////////////////////////////// fo make the first string upperCase
   const capitalizeFirstLetter = (word) => {
@@ -156,7 +156,11 @@ export default function Chats() {
 
   async function chat_box_info(item) {
     setSelected_item(item.name);
-    setchat_box(<Chat_Box info_chat={item} />);
+    const Lazy_Box = React.lazy(() => import("./chat_box"));
+    setchat_box(
+      <Suspense fallback={<Loading_App />}>
+    <Lazy_Box info_chat={item} />
+    </Suspense>);
     dispatch({ type: "openEdChat", payload: item });
   }
 
@@ -175,13 +179,13 @@ export default function Chats() {
     getChates();
   }, [send, notifications]);
 
-  const colors = [null, "green", "blue", "white", "black", "red"];
+ 
   return (
     <main
       className=" flex flex-row  h-screen   "
       style={{ overflow: "hidden" }}
     >
-      <div className=" flex flex-col bg-gray-800 h-screen   basis-[30%]   h-full    border-solid  border-r-4 border-gray-700 shadow-2xl ">
+      <div className=" flex flex-col bg-black h-screen   basis-[30%]       border-solid   shadow-2xl ">
         <div className="flex flex-row pt-2 mt-12 ">
           <div className="flex-initial  w-48 h-10  ">
             <h5 className="text-xl text-white pl-2">
@@ -213,7 +217,10 @@ export default function Chats() {
           </div>
         </div>
         <hr />
-        {loadingChat && filter_chat?.length >= 1 ? (
+        <div className="overflow-y-auto">
+
+        {loadingChat ? (
+         filter_chat?.length > 0 ? (
           filter_chat.map((item, index) => {
             return (
               <div className="pl-2 pr-2  " key={index}>
@@ -329,7 +336,7 @@ export default function Chats() {
               </div>
             );
           })
-        ) : loadingChat && !filter_chat ? (
+        ) :(
           <div className="text-white text-center  mt-[10%]">
             <h1>
               <br />
@@ -340,149 +347,10 @@ export default function Chats() {
               Create Chat
             </button>
           </div>
-        ) : (
-          <>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4 ">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4 ">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4 ">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-            <div className="flex flex-nowrap mt-2">
-              <span>
-                {" "}
-                <Skeleton
-                  variant="circular"
-                  width={70}
-                  height={70}
-                  sx={{ marginLeft: "20px " }}
-                />
-              </span>
-              <span className="w-full mr-4 ">
-                <Skeleton
-                  variant="rounded"
-                  width={"100%"}
-                  height={70}
-                  sx={{
-                    marginRight: "10px ",
-                    marginLeft: "5px",
-                    marginTop: "6px",
-                  }}
-                />
-              </span>
-            </div>
-          </>
-        )}
+        ) ):    <Loding_Chat/> } 
+   
       </div>
+     </div>
       <div className="h-screen col-span-2 basis-[70%]  grid mt-12 text-black">
         <MessageSnded.Provider value={{ handelMessageSended }}>
           {chat_box}

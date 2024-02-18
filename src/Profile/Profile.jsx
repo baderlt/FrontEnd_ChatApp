@@ -30,7 +30,7 @@ const style = {
 };
 
 export default function Profile(props){
-       const colors = [null, "green", "blue", "white", "black", "red"];
+       const colors = [null, "green", "blue", "white", "gray", "red"];
        const [openModel,setOpenModel]=useState(false)
 
        const dispatch=useDispatch()
@@ -47,7 +47,7 @@ export default function Profile(props){
       setOpenModel(!openModel)
     }
     return (
-        <div className="bg-gray-800 w-full h-[100%]  text-white  w-[90%] lg:w-[500px]  md:w-[400px] "  >
+        <div className="bg-black w-full h-[100%]  text-white  w-[90%] lg:w-[500px]  md:w-[400px] "  >
           <Modal
   open={openModel}
   onClose={handleClose}
@@ -62,7 +62,7 @@ export default function Profile(props){
           <span className="ml-2 pb-2 pt-1 rounded-lg hover:bg-red-600 fixed" onClick={Close_Drawer}><CloseIcon fontSize="large" color="red"/></span>
      <div className="container mx-auto p-8">
       <div className="max-w-md mx-auto  overflow-hidden">
-        <div className=" bg-center h-40 p-4 ml-[5%] w-[90%] relative bg-gray-800">
+        <div className=" bg-center h-40 p-4 ml-[5%] w-[90%] relative bg-black">
           {/* User profile picture */}
           {/* <img
             src={profileImage }

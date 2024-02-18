@@ -18,14 +18,14 @@ import Default_Page from "./Default_Chat_box_page";
 import DarkMode from "./togle_dark";
 export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
-  const colors = [null, "green", "blue", "white", "black", "red"];
+  const colors = [null, "green", "blue", "white", "gray", "red"];
   const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
-  let messages_loading = true;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const [refreche, setrefrech] = useState(false);
-  const All_messages_ = UseGetMessages(props.info_chat, refreche);
+  const All_messages_ =UseGetMessages(props.info_chat, refreche);
   const [message, setmessage] = useState();
   const [newMessage, SetNewMessage] = useState();
   const [Messages, SetMessages] = useState();
@@ -37,7 +37,7 @@ export default function Chat_Box(props) {
   useEffect(() => {
     SetMessages(All_messages_);
     SetFilterMessages(All_messages_);
-    // messages_loading=!messages_loading;
+
   }, [All_messages_]);
 
   ///////////////////////
@@ -241,7 +241,7 @@ export default function Chat_Box(props) {
               <h2>{props?.info_chat?.name}</h2>
               </div> */}
                   <div class="grid grid-cols-12 gap-y-2  ">
-                    {FilterMessages && FilterMessages.length >= 1 ? (
+                  {FilterMessages && FilterMessages.length >= 1 ? (
                       FilterMessages.map((item, index) => (
                         // {return   item.SenderId != Info_User._id ?
                         <div
@@ -381,13 +381,14 @@ export default function Chat_Box(props) {
                           </div>
                         </div>
                       ))
-                    ) : messages_loading ? (
+                    ) : true ? (
                       <Messages_Loding />
                     ) : FilterMessages && FilterMessages?.length == 0 ? (
                       `Sned the first message to ${props.info_chat?.name}`
                     ) : (
-                      ""
+                      <Messages_Loding/>
                     )}
+
                   </div>
                 </div>
               </div>

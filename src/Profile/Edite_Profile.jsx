@@ -13,7 +13,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { baseUrl } from '../touls';
-const colors = [null, "green", "blue", "white", "black", "red"];
+const colors = [null, "green", "blue", "white", "gray", "red"];
 
 export const Edite_Profile=(props)=>{
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
