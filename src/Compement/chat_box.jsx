@@ -16,9 +16,9 @@ import UseGetMessages from "../useGetMessages";
 import Messages_Loding from "./Messages_Loding";
 import Default_Page from "./Default_Chat_box_page";
 import DarkMode from "./togle_dark";
+import { colors } from "../touls";
 export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
-  const colors = [null, "green", "blue", "white", "gray", "red"];
   const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
 
   const navigate = useNavigate();
@@ -377,8 +377,6 @@ export default function Chat_Box(props) {
                           </div>
                         </div>
                       ))
-                    ) : true ? (
-                      <Messages_Loding />
                     ) : FilterMessages && FilterMessages?.length == 0 ? (
                       `Sned the first message to ${props.info_chat?.name}`
                     ) : (

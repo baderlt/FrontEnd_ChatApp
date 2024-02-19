@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Loading_App from "./Loding/Loading_App";
 
-
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyLogin = React.lazy(() => import("./pages/login"));
 
@@ -80,7 +79,7 @@ function App() {
             </Suspense>
           }
         />
-
+     
         <Route
           path="*"
           element={

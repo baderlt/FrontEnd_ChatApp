@@ -13,7 +13,7 @@ import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { OnlinUserContext } from "../pages/Home";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
-
+import { colors } from "../touls";
 const navigation = [
   { name: "Chats", href: "/home/" },
   { name: "New Chat", href:"/home/NewChat" },
@@ -26,7 +26,7 @@ function classNames(...classes) {
 
 export default function Nav_Bar() {
   const dispatch = useDispatch();
-  const colors = [null, "green", "blue", "white", "gray", "red"];
+
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const Users = useSelector((state) => state.alert.Users);
   const [open_, setOpen] = useState(false);

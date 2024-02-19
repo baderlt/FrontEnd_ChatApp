@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { Box, Modal } from "@mui/material";
 import { Edite_Profile } from "./Edite_Profile";
 import { baseUrl } from "../touls";
+import { colors } from "../touls";
 const style = {
   position: 'relative',
   top: '50%',
@@ -30,7 +31,7 @@ const style = {
 };
 
 export default function Profile(props){
-       const colors = [null, "green", "blue", "white", "gray", "red"];
+
        const [openModel,setOpenModel]=useState(false)
 
        const dispatch=useDispatch()

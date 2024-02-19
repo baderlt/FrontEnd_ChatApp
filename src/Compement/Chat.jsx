@@ -23,10 +23,10 @@ import moment from "moment";
 import Loding_Chat from "./loading_chat";
 import Loading_App from "../Loding/Loading_App";
 import Chat_Box from "./chat_box";
-
+import { colors } from "../touls";
 export const MessageSnded = createContext(null);
 export default function Chats() {
-  const colors = [null, "green", "blue", "white", "gray", "red"];
+
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const [chat_Data, setchat_Data] = useState();
   const [filter_chat, setfilter_chat] = useState();
