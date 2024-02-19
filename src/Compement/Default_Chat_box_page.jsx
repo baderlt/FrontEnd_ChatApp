@@ -9,7 +9,7 @@ const Default_Page=()=>{
       <img
         src="logo_.png"
         alt="Logo chat"
-        class="animate-pulse ml-16 grid  place-content-center  "
+        class="animate-pulse ml-24 grid  place-content-center  "
       />
       <br />
 

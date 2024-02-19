@@ -1,10 +1,9 @@
 
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faUser } from "@fortawesome/free-regular-svg-icons";
+import {  faUser } from "@fortawesome/free-regular-svg-icons";
 import InfoIcon from '@mui/icons-material/Info';
 import { useSelector } from "react-redux";
-import axios from "axios";
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import Instagram from "@mui/icons-material/Instagram";

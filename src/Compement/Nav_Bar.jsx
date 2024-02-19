@@ -1,6 +1,6 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AvatarReactjs from "avatar-reactjs";
 import { Alert, AlertTitle, CircularProgress, Snackbar } from "@mui/material";
 

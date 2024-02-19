@@ -378,7 +378,11 @@ export default function Chat_Box(props) {
                         </div>
                       ))
                     ) : FilterMessages && FilterMessages?.length == 0 ? (
-                      `Sned the first message to ${props.info_chat?.name}`
+                      <div className={`flex justify-center items-center flex-col ${toggle ? 'text-white' :'text-black' } ml-[550%] mt-[250%] w-full`}>
+                        <img src="logo_.png"  alt="" />
+                        <h3 className="w-[400px] text-center">  Send the first message to <b>{props.info_chat?.name}</b></h3>
+                    
+                      </div>
                     ) : (
                       <Messages_Loding/>
                     )}

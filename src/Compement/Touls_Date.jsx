@@ -1,29 +1,4 @@
-//  export const getDayOrDate = (dateString) => {
-//     const date = new Date(dateString);
-//     const currentDate = new Date();
-  
-//     // Check if the date is within the current week
-//     const isSameWeek = date => {
-//       const startOfWeek = new Date(currentDate);
-//       startOfWeek.setHours(0, 0, 0, 0);
-//       startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
-      
-//       const endOfWeek = new Date(startOfWeek);
-//       endOfWeek.setDate(startOfWeek.getDate() + 6);
-  
-//       return date >= startOfWeek && date <= endOfWeek;
-//     };
-  
-//     if (isSameWeek(date)) {
-//       // Get the name of the day
-//       const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
-//       return dayName;
-//     } else {
-//       // Format the date as 'MM/DD/YYYY'
-//       const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-//       return formattedDate;
-//     }
-//   };
+
 
  export function getDayOrDate(inputDate) {
   var inputDate=new Date(inputDate)
