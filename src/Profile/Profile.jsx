@@ -97,7 +97,7 @@ export default function Profile(props){
           {/* User information */}
            <h2 className="text-2xl font-semibold mt-6"><FontAwesomeIcon icon={ faUser} size=""/> &ensp;{props.User.name}</h2>
        
-          <h3 className="text-gray-200 mt-10"><InfoIcon/> &ensp;{props.User.bio || `Hi i'am ${props.User.name}`}</h3>
+          <h3 className="text-gray-200 mt-10"><InfoIcon/> {console.log(props.User)} &ensp;{!props.User.bio || props.User.bio == "undefined" ?  `Hi i'am ${props.User.name}`:props.User.bio}</h3>
           <h3 className="text-gray-200 mt-10"><AlternateEmailIcon/> &ensp;{props.User.email ? props.User.email :'xxxxxxxxx@xxxx.xxx'}</h3>
           {/* Add more user information as needed */}
        <br /><br />

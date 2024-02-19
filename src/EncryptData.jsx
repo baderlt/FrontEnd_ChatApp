@@ -11,3 +11,18 @@ import CryptoJS from 'crypto-js';
       return 'Decryption failed';
     }
   };
+
+export const encryptData=(data)=>{
+  try{
+
+    const dataToEncrypt = JSON.stringify(data);
+    const encryptedData = CryptoJS.AES.encrypt(dataToEncrypt, "FgK@jsBADER&122003%04").toString();
+    return encryptedData;
+
+  
+  }catch(error){
+    console.log('encryption error failed to encrypt data')
+  }
+
+
+}  
