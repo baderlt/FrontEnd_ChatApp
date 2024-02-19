@@ -16,13 +16,13 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Chat_Box from "./chat_box";
 import { baseUrl } from "../touls";
 import { OnlinUserContext } from "../pages/Home";
 
 import moment from "moment";
 import Loding_Chat from "./loading_chat";
 import Loading_App from "../Loding/Loading_App";
+import Chat_Box from "./chat_box";
 
 export const MessageSnded = createContext(null);
 export default function Chats() {
@@ -156,10 +156,9 @@ export default function Chats() {
 
   async function chat_box_info(item) {
     setSelected_item(item.name);
-    const Lazy_Box = React.lazy(() => import("./chat_box"));
     setchat_box(
       <Suspense fallback={<Loading_App />}>
-    <Lazy_Box info_chat={item} />
+    <Chat_Box info_chat={item} />
     </Suspense>);
     dispatch({ type: "openEdChat", payload: item });
   }

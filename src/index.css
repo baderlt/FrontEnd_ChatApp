@@ -2,13 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer{
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kdam+Thmor+Pro&family=Pacifico&display=swap');
+    /* @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Kdam+Thmor+Pro&family=Pacifico&display=swap');
     *{
         font-family: "Kdam Thmor Pro", sans-serif;
     
-      }
+      } */
  
  
       .custom{
@@ -44,5 +43,26 @@
       color:white;
     }
 
-
+    ::-webkit-scrollbar {
+      width: 5px;
+      background: transparent;  
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: transparent;  
+      width: 5px;
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #7c34e983; 
+      border-radius: 12px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7a3ceeaa; 
+    }
 }
+

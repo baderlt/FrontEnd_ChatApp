@@ -1,10 +1,6 @@
 import {
-  BrowserRouter,
-  HashRouter,
   Route,
-  Router,
   Routes,
-  useNavigate,
 } from "react-router-dom";
 import Nav_Bar from "../Compement/Nav_Bar";
 // import Chats from "../Compement/Chat";
@@ -16,12 +12,13 @@ import { baseUrl } from "../touls";
 import Drawer_Info from "../Drawer_Profil";
 import NewChat from "../Compement/NewChat";
 import Not_Found from "./Not_Found";
-import Loding_Chat from "../Compement/loading_chat";
 import Loading_App from "../Loding/Loading_App";
+import Chats from "../Compement/Chat";
 export const OnlinUserContext = createContext(null);
+
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 
-const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
+// const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
 const Home = () => {
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
@@ -153,7 +150,7 @@ const Home = () => {
             path={"/"}
             element={
               <Suspense fallback={<Loading_App />}>
-                <Lazy_chats />
+            <Chats/>
               </Suspense>
               // <Chats/>
             }

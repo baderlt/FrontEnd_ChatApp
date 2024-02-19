@@ -117,13 +117,9 @@ export default function Chat_Box(props) {
     <>
       {props?.info_chat ? (
         <div
-          className={`h-screen  main  ${
-            toggle
-              ? "bg-[url('bg_chat3_dark.png')]"
-              : "bg-[url('bg_chat3.png')]"
-          }   mr-4  `}
-          style={{ width: "100%", height: "100vh" }}
-        >
+          className={`h-screen  main  mr-4  `}
+          style={{ width: "100%", height: "100vh",backgroundImage:toggle ? "url('bg_chat3_dark.png')" : "url('bg_chat3.png')" }}
+       >
           <div
             className={`${
               toggle ? "header_dark" : "bg-white"
@@ -356,7 +352,7 @@ export default function Chat_Box(props) {
                                   {item.message}
                                 </p>
                                 <div
-                                  className={`text-gray-500  text-right  ${
+                                  className={ `${toggle ? 'text-white': 'text-gray-500'}  text-right  ${
                                     FilterMessages[index + 1]?.SenderId !=
                                       item.SenderId ||
                                     (getDayOrDate(
