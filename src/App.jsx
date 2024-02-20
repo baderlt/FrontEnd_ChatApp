@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Loading_App from "./Loding/Loading_App";
+import { decryptData } from "./EncryptData";
 
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyLogin = React.lazy(() => import("./pages/login"));
@@ -16,7 +17,6 @@ function App() {
   const globale_State = useSelector((state) => state.alert.composant);
 
   const [isauth, setisauth] = useState(false);
-
   const check_Auth_User = async () => {
     const info = localStorage.getItem("info_User");
 

@@ -327,7 +327,7 @@ export default function Nav_Bar() {
                                 Open_Drawer(e);
                               }}
                             >
-                              Your Profile
+                               Profile
                             </a>
                           )}
                         </Menu.Item>

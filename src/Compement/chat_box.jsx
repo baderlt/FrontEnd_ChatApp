@@ -11,7 +11,7 @@ import { Time_Date, getDayOrDate } from "./Touls_Date";
 import { MessageSnded } from "./Chat";
 import { useContext } from "react";
 import { OnlinUserContext } from "../pages/Home";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import UseGetMessages from "../useGetMessages";
 import Messages_Loding from "./Messages_Loding";
 import Default_Page from "./Default_Chat_box_page";
@@ -21,7 +21,7 @@ export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
   const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const [refreche, setrefrech] = useState(false);
@@ -99,15 +99,18 @@ export default function Chat_Box(props) {
         }
         SetNewMessage(res.data), handelMessageSended();
       })
-      .catch(() => {
-        navigate("/login");
-        window.location.reload();
+      .catch((er) => {
+        console.log(er);
+        <Navigate to={'/login'}/> 
+        // navigate("/login");
+        // window.location.reload();
         dispatch({
           type: "error",
           payload: { message: "Unauthorized", openError: true },
         });
       });
   };
+  
 
   function capitalizeFirstLetter(word) {
     return word[0].toUpperCase() + word.substring(1);
@@ -164,13 +167,13 @@ export default function Chat_Box(props) {
               </div>
               <div>
                 <p className="text-green-600" style={{ fontSize: 10 }}>
-                  {onlineUser.some(
+                  {onlineUser ? onlineUser.some(
                     (user) => user.userId === props?.info_chat?._id
                   ) ? (
                     <b>Onling</b>
                   ) : (
                     ""
-                  )}
+                  ):null}
                 </p>
               </div>
             </div>
@@ -342,8 +345,10 @@ export default function Chat_Box(props) {
                               className={
                                 item.SenderId != Info_User._id
                                   ? ` ml-2 text-sm ${toggle ? "left-dark" :"bg-white"} shadow rounded-lg`
-                                  : ` mr-3 flex flex-row text-sm ${toggle ? "right-dark" :"bg-indigo-100"}   shadow rounded-lg`
+                                  : ` mr-3 flex flex-row text-sm ${toggle ? "right-dark" :"bg-indigo-100"}    shadow rounded-lg`
                               }
+                              style={{wordBreak:"break-all"}}
+                            
                             >
                               <div className=" py-0.5  px-4 pl-2 ">
                                 <p
@@ -393,7 +398,8 @@ export default function Chat_Box(props) {
               <div
                 class={` ${
                   toggle ? "footer-dark" : " bg-white "
-                } flex flex-row items-center h-16 rounded-xl w-full px-4`}
+                } flex flex-row items-center min-h-16 max-h-28 rounded-xl  px-4 `}
+                style={{wordBreak:"break-all"}}
               >
                 <div>
                   <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
@@ -421,6 +427,7 @@ export default function Chat_Box(props) {
                       ? sendMessage()
                       : "";
                   }}
+            
                   fontFamily="nonito"
                   borderColor="gray"
                   borderRadius={15}
@@ -434,7 +441,7 @@ export default function Chat_Box(props) {
                       message != ""
                         ? "bg-indigo-500 hover:bg-indigo-600"
                         : "bg-gray-300 "
-                    } rounded-xl text-black px-4 py-1 flex-shrink-0`}
+                    } rounded-xl w-28 text-black px-2 py-1 flex-shrink-0`}
                     disabled={message == "" ? true : false}
                   >
                     <span>Send</span>

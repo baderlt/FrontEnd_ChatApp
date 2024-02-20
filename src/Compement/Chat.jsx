@@ -110,7 +110,7 @@ export default function Chats() {
       })
       .then((res) => {
         Trichat(res.data);
-        // SetLoadingChat(true);
+        SetLoadingChat(true);
       })
       .catch((err) => console.log(err));
   };
@@ -139,7 +139,7 @@ export default function Chats() {
 
     setfilter_chat(all_chats);
     setchat_Data(all_chats);
-    SetLoadingChat(true);
+ 
   };
   /////////////////////////////// fo make the first string upperCase
   const capitalizeFirstLetter = (word) => {
@@ -278,9 +278,11 @@ export default function Chats() {
                   <div className=" w-full">
                     <span className="flex flex-row " style={{ width: "100%" }}>
                       <h2 className=" text-white pl-0 col-span-4 basis-1/2 ">
+                      {console.log(item)}
                         &ensp;{capitalizeFirstLetter(item.name)}
                       </h2>
                       <p className="text-white  text-xs basis-1/2 text-right ">
+                      
                         {date_OF_lAST_Message(item._id)
                           ? moment(
                               date_OF_lAST_Message(item._id || item.SendAt)
