@@ -1,8 +1,13 @@
 
 import AvatarReactjs from "avatar-reactjs";
 import { baseUrl, colors } from "../../touls";
-const RecentUsers=()=>{
-  const Users_Searched=JSON.parse(localStorage.getItem("Users_Searched")) || [];
+import { useEffect, useState } from "react";
+const RecentUsers=({refrech})=>{
+  const [Users_Searched,setUsers_Searched]=useState([]);
+  useEffect(()=>{
+    let u=JSON.parse(localStorage.getItem("Users_Searched"));
+ setUsers_Searched(u || [])
+  },[refrech])
 
 return <>
 <h2 className="text-gray-300 text-xl">Recent</h2>

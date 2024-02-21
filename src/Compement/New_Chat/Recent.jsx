@@ -1,13 +1,11 @@
 import RecentSearch from "./R_Search";
 import RecentUsers from "./R_users";
 
-const Recent=()=>{
+const Recent=({refrech})=>{
     return (
         <>
-<RecentUsers/>
-
-<RecentSearch/>
-      
+<RecentUsers refrech={refrech}/>
+<RecentSearch refrech={refrech}/>
         </>
     )
 }

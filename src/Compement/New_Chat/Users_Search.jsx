@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AvatarReactjs from "avatar-reactjs";
 import { baseUrl, colors } from "../../touls";
-const Users_Search = () => {
+const Users_Search = ({handleRefrech}) => {
   const users = useSelector((state) => state.alert.Users);
   const [Filter_Users, SetUsers] = useState(users);
   const search_Value = useRef();
@@ -10,11 +10,13 @@ const Users_Search = () => {
     const Serched = JSON.parse(localStorage.getItem("searched")) || [];
     //    if(Serched.length >=10 ) Serched.shift();
     if (search_Value.current.value != "") {
-        if (Serched.length >= 10) Serched.shift();
+        if (Serched.length >= 10) Serched.pop();
+        Serched.unshift(search_Value.current.value)
       localStorage.setItem(
         "searched",
-        JSON.stringify([...Serched, search_Value.current.value])
+        JSON.stringify([...Serched])
       );
+      handleRefrech();
   
     }
     let value = search_Value.current.value.toLowerCase();
@@ -27,13 +29,15 @@ const Users_Search = () => {
 
   const Get_Profile=(user)=>{
     const Users_Searched = JSON.parse(localStorage.getItem("Users_Searched")) || [];
-        if (Users_Searched.length >= 10) Users_Searched.shift();
+        if (Users_Searched.length >= 10) Users_Searched.pop();
       let Users_Filtred=Users_Searched.filter((item)=>item._id != user._id);
+      Users_Filtred.unshift(user)
       localStorage.setItem(
         "Users_Searched",
-        JSON.stringify([...Users_Filtred, user])
+        JSON.stringify([...Users_Filtred])
       );
-console.log(user);    
+      handleRefrech(); 
+
 }
   return (
     <>
