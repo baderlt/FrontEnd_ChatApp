@@ -248,11 +248,13 @@ export default function Chats() {
                       height={"50px"}
                     />
                   ) : (
-                    <img
-                      src={`${baseUrl}/users/${item.pic}`}
-                      alt="User Profile "
-                      className="  rounded-[50%] flex-1 w-[50px] h-[50px]"
-                    />
+                    <AvatarReactjs
+                    name={item.name ? item.name : "user"}
+                    fontSize={"large"}
+                    src={`${baseUrl}/users/${item.pic}`}
+                    width={"50px"}
+                    height={"50px"}
+                  />
                   )}
 
                   {onlineUser &&
@@ -278,7 +280,7 @@ export default function Chats() {
                   <div className=" w-full">
                     <span className="flex flex-row " style={{ width: "100%" }}>
                       <h2 className=" text-white pl-0 col-span-4 basis-1/2 ">
-                      {console.log(item)}
+     
                         &ensp;{capitalizeFirstLetter(item.name)}
                       </h2>
                       <p className="text-white  text-xs basis-1/2 text-right ">

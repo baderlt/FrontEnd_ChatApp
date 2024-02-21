@@ -10,10 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { baseUrl } from "../touls";
 import Drawer_Info from "../Drawer_Profil";
-import NewChat from "../Compement/NewChat";
+
 import Not_Found from "./Not_Found";
 import Loading_App from "../Loding/Loading_App";
 import Chats from "../Compement/Chat";
+import NewChat from "../Compement/New_Chat/NewChat";
 export const OnlinUserContext = createContext(null);
 
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
