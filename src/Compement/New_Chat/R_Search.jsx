@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 
 const RecentSearch=({refrech})=>{
     let [Serched,setSearched]=useState([]);
-    let removed=false;
+    let [removed,setremoved]=useState(false);
 
-
-
+///////// intialisation liste of serched item 
     useEffect(()=>{ 
         const s=JSON.parse(localStorage.getItem('searched'));
         setSearched(s || [])
@@ -18,9 +17,10 @@ const RecentSearch=({refrech})=>{
        Serched.splice(index,1);
       ///// update the list in localstorage 
       localStorage.setItem('searched',JSON.stringify([...Serched]));
-      removed!= removed;
+      setremoved(!removed);
    
     }
+
     return <>
     {Serched.length >=1   ? Serched.map((item,index)=>{
         return <div key={index} className="flex flex-col text-white gap-2  py-2 px-4 ">

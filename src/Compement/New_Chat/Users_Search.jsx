@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AvatarReactjs from "avatar-reactjs";
 import { baseUrl, colors } from "../../touls";
-const Users_Search = ({handleRefrech}) => {
+const Users_Search = ({handleRefrech,HandleProfile}) => {
   const users = useSelector((state) => state.alert.Users);
   const [Filter_Users, SetUsers] = useState(users);
   const search_Value = useRef();
+  const [curent_User,SetCurentUser]=useState(null);
+
   const Search = () => {
     const Serched = JSON.parse(localStorage.getItem("searched")) || [];
     //    if(Serched.length >=10 ) Serched.shift();
@@ -36,12 +38,14 @@ const Users_Search = ({handleRefrech}) => {
         "Users_Searched",
         JSON.stringify([...Users_Filtred])
       );
+      SetCurentUser(user._id);
+      HandleProfile(user);
       handleRefrech(); 
 
 }
   return (
     <>
-      <div class="flex items-center w-full justify-center p-5 text-white">
+      <div class="flex items-center w-full justify-center mt-2 p-5 text-white">
         <div class="rounded-lg  w-full ">
           <div class="flex w-full">
             <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-gray-700 p-5">
@@ -78,7 +82,7 @@ const Users_Search = ({handleRefrech}) => {
             return (
               <div
                 key={index}
-                className="text-white rounded-lg p-2  hover:bg-gray-700  flex flex-row gap-3  h-16 w-full" onClick={()=>{Get_Profile(item)}}
+                className={`text-white rounded-lg p-2  hover:bg-gray-700 ${curent_User == item._id ? "bg-gray-700":""} flex flex-row gap-3  h-16 w-full`} onClick={()=>{Get_Profile(item)}}
             >
                 {Number.isInteger(Number(item.pic)) ? (
                   <AvatarReactjs

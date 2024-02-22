@@ -228,7 +228,7 @@ export default function Chats() {
                     item.name == selected_item
                       ? "bg-gray-700"
                       : "border-gray-600/50"
-                  } rounded-md  w-full`}
+                  }   w-full`}
                   onClick={() => {
                     chat_box_info(item);
                     Filter_Notification(item._id);
