@@ -26,7 +26,7 @@ return <>
         <div className="  flex flex-row gap-2 overflow-x-auto ml-2 p-2 h-28">
 
           {Users_Searched.length >= 1 ? Users_Searched.map((user,index)=>{
-            return  <span className="w-20 text-white text-xs hover:bg-gray-700   border border-gray-600 rounded-lg content-center text-center items-center pt-2 pb-2">
+            return  <span className="w-20 text-white text-xs hover:bg-gray-800   border border-gray-800 rounded-lg content-center text-center items-center pt-2 pb-2">
             {" "}
             <div className="flex w-20  items-center flex-col relative">
               <button className="absolute  right-0 -top-2 bg-red-400 text-black hover:bg-red-600 rounded-full" onClick={()=>removeItem(index)} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">

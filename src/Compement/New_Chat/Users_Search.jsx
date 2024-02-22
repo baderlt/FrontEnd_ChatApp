@@ -1,16 +1,27 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import AvatarReactjs from "avatar-reactjs";
 import { baseUrl, colors } from "../../touls";
-const Users_Search = ({handleRefrech,HandleProfile}) => {
-  const users = useSelector((state) => state.alert.Users);
-  const [Filter_Users, SetUsers] = useState(users);
+import axios from "axios";
+import Loding_Chat from "../loading_chat";
+const Users_Search = ({handleRefrech,HandleProfile,HandleLoding}) => {
+  let us=useSelector((state)=>state.alert.Users);
+  const Info_User = useSelector((state) => state.Auth_check.user_Info);
+  const [users,setUsers]=useState(null);
+  const [Filter_Users, SetFilterUsers] = useState(null);
   const search_Value = useRef();
   const [curent_User,SetCurentUser]=useState(null);
+console.log(us);
+///// hndael the users from global stats
+useEffect(()=>{
+setUsers(us);
+SetFilterUsers(us);
+},[us])
 
+
+//////// this function for add the item serched in list serched in localstroage 
   const Search = () => {
     const Serched = JSON.parse(localStorage.getItem("searched")) || [];
-    //    if(Serched.length >=10 ) Serched.shift();
     if (search_Value.current.value != "") {
         if (Serched.length >= 10) Serched.pop();
         Serched.unshift(search_Value.current.value)
@@ -25,11 +36,12 @@ const Users_Search = ({handleRefrech,HandleProfile}) => {
     const Data_Filtred = users.filter((item) =>
       item.name.toLowerCase().includes(value)
     );
-    SetUsers(Data_Filtred);
+    SetFilterUsers(Data_Filtred);
   };
 
 
-  const Get_Profile=(user)=>{
+  const Get_Profile= async (user)=>{
+    HandleLoding(true);
     const Users_Searched = JSON.parse(localStorage.getItem("Users_Searched")) || [];
         if (Users_Searched.length >= 10) Users_Searched.pop();
       let Users_Filtred=Users_Searched.filter((item)=>item._id != user._id);
@@ -39,14 +51,22 @@ const Users_Search = ({handleRefrech,HandleProfile}) => {
         JSON.stringify([...Users_Filtred])
       );
       SetCurentUser(user._id);
-      HandleProfile(user);
+     const Has_Chat= await axios.get(`${baseUrl}/Chats/find/${user._id}/${Info_User._id}`,{headers:{Authorization:`bearer ${Info_User.token}` }});
+     if(Has_Chat.data.length == 1){
+      user={...user,frende:true}
+     }
+  
+   
       handleRefrech(); 
-
+      HandleProfile(user);
+      HandleLoding(false);
 }
   return (
     <>
-      <div class="flex items-center w-full justify-center mt-2 p-5 text-white">
-        <div class="rounded-lg  w-full ">
+    
+      <div class="flex items-center w-full justify-center  text-white">
+        
+        <div class="rounded-lg  w-full mb-2 ">
           <div class="flex w-full">
             <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-gray-700 p-5">
               <svg
@@ -76,13 +96,13 @@ const Users_Search = ({handleRefrech,HandleProfile}) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full px-5 gap-2">
+      <div className="flex flex-col w-full  gap-2">
         {Filter_Users && Filter_Users.length >= 1 ? (
           Filter_Users.map((item, index) => {
             return (
               <div
                 key={index}
-                className={`text-white rounded-lg p-2  hover:bg-gray-700 ${curent_User == item._id ? "bg-gray-700":""} flex flex-row gap-3  h-16 w-full`} onClick={()=>{Get_Profile(item)}}
+                className={`text-white rounded-lg p-2  hover:bg-gray-900 ${curent_User == item._id ? "bg-gray-900":""} flex flex-row gap-3  h-16 w-full`} onClick={()=>{Get_Profile(item)}}
             >
                 {Number.isInteger(Number(item.pic)) ? (
                   <AvatarReactjs
@@ -117,11 +137,11 @@ const Users_Search = ({handleRefrech,HandleProfile}) => {
               </div>
             );
           })
-        ) : (
+        ) :  !Filter_Users ? <Loding_Chat/> : 
           <div className="text-gray-300 flex items-center justify-center mt-4">
-            No results found for "{search_Value.current.value}"
+            No results found for "{search_Value.current?.value}"
           </div>
-        )}
+        }
       </div>
     </>
   );

@@ -41,7 +41,6 @@ function App() {
       return;
     }
   };
-
   useEffect(() => {
     check_Auth_User();
   }, []);
