@@ -100,13 +100,13 @@ export default function Chat_Box(props) {
         SetNewMessage(res.data), handelMessageSended();
       })
       .catch((er) => {
-        console.log(er);
-        <Navigate to={'/login'}/> 
+        // console.log(er);
+        // <Navigate to={'/login'}/> 
         // navigate("/login");
         // window.location.reload();
         dispatch({
           type: "error",
-          payload: { message: "Unauthorized", openError: true },
+          payload: { message: "Error server Try agin ..!", openError: true },
         });
       });
   };

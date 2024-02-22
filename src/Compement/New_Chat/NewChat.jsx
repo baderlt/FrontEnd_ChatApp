@@ -26,7 +26,7 @@ const NewChat = () => {
       style={{ height: "calc(100vh - 48px )", boxSizing: "border-box" }} >
       <div className={` w-[30%] h-full overflow-y-auto pl-4 pt-4 border border-black border-r-gray-700`}>
         
-      <Recent refrech={refrech} />
+      <Recent refrech={refrech} handleRefrech={handleRefrech} HandleProfile={HandleProfile}  HandleLoding={HandleLoding} />
 
       </div>
 

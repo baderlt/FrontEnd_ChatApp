@@ -47,6 +47,10 @@ const Profile_User = (props) => {
     }
   };
 
+  ///// this function for opening the chat for send messages 
+  const Send_Message=()=>{
+    
+  }
 
   return (
     <>

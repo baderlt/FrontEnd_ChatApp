@@ -1,7 +1,7 @@
 import RecentSearch from "./R_Search";
 import RecentUsers from "./R_users";
 
-const Recent=({refrech})=>{
+const Recent=(props)=>{
     return (
         <>
         <h2 className="text-xl text-gray-300 flex flex-row gap-2 mt-2 items-center"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
@@ -9,8 +9,8 @@ const Recent=({refrech})=>{
   <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
   <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
 </svg>Recent</h2>
-<RecentUsers refrech={refrech}/>
-<RecentSearch refrech={refrech}/>
+<RecentUsers {...props} />
+<RecentSearch refrech={props.refrech}/>
         </>
     )
 }

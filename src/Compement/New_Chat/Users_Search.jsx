@@ -11,7 +11,7 @@ const Users_Search = ({handleRefrech,HandleProfile,HandleLoding}) => {
   const [Filter_Users, SetFilterUsers] = useState(null);
   const search_Value = useRef();
   const [curent_User,SetCurentUser]=useState(null);
-console.log(us);
+
 ///// hndael the users from global stats
 useEffect(()=>{
 setUsers(us);
@@ -23,12 +23,14 @@ SetFilterUsers(us);
   const Search = () => {
     const Serched = JSON.parse(localStorage.getItem("searched")) || [];
     if (search_Value.current.value != "") {
-        if (Serched.length >= 10) Serched.pop();
-        Serched.unshift(search_Value.current.value)
+      if(!Serched[Info_User.name])Serched[Info_User.name]=[];
+      Serched[Info_User.name].unshift(search_Value.current.value)
       localStorage.setItem(
         "searched",
-        JSON.stringify([...Serched])
+        JSON.stringify({...Serched})
       );
+        if (Serched[Info_User.name].length >= 10) Serched[Info_User.name].pop();
+      
       handleRefrech();
   
     }
@@ -42,15 +44,24 @@ SetFilterUsers(us);
 
   const Get_Profile= async (user)=>{
     HandleLoding(true);
+    ///// get the object of list users serched like {"bader":[{"_id":233332,"name":'dhdjd;},{"_id":"6784","name":'fff'}]}
     const Users_Searched = JSON.parse(localStorage.getItem("Users_Searched")) || [];
-        if (Users_Searched.length >= 10) Users_Searched.pop();
-      let Users_Filtred=Users_Searched.filter((item)=>item._id != user._id);
+    ///// if the the user authentifed dont have list ibject serched in localstorage 
+     if(!Users_Searched[Info_User.name]) Users_Searched[Info_User.name]=[];
+     /////// this for remove  the curent user clicked if alredy in list of object clicked   
+      let Users_Filtred=Users_Searched[Info_User.name].filter((item)=>item._id != user._id);
+      ///////////// use unshift for add the user serched in the first 
       Users_Filtred.unshift(user)
+      // initialiser the new list of users filtred.
+      Users_Searched[Info_User.name]=Users_Filtred;
       localStorage.setItem(
         "Users_Searched",
-        JSON.stringify([...Users_Filtred])
+        JSON.stringify({...Users_Searched})
       );
+      /// if the list of users serched >  10 remove one . the max users stocked is 10 
+      if (Users_Searched[Info_User.name].length >= 10) Users_Searched.pop();
       SetCurentUser(user._id);
+      /// this requst for test if the user alerdy have a chat with user serched 
      const Has_Chat= await axios.get(`${baseUrl}/Chats/find/${user._id}/${Info_User._id}`,{headers:{Authorization:`bearer ${Info_User.token}` }});
      if(Has_Chat.data.length == 1){
       user={...user,frende:true}
