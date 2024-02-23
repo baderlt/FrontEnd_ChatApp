@@ -34,11 +34,7 @@ export const Edite_Profile = (props) => {
       : `hi i'm ${name}  `
   );
   const [sending, SetSending] = useState(false);
-  const [ProfileImageView, setProfileImageView] = useState(
-    !Number.isInteger(Number(props?.User?.pic))
-      ? `${baseUrl}/users/${props.User.pic}`
-      : props?.User?.pic
-  );
+  const [ProfileImageView, setProfileImageView] = useState(props.User.pic);
   const [errors, seterrors] = useState({
     name: "",
     bio: "",
@@ -202,20 +198,42 @@ export const Edite_Profile = (props) => {
     }
   };
 
-  const removeImage = () => {
-    if (ProfileImageView === 3) {
-      alert("You don't have a photo to remove !");
+  const removeImage = async() => {
+    if ( Number.isInteger(Number(ProfileImageView))) {
+      alert("You don't have a Picture to remove !");
       return false;
     }
     const confirmation = confirm(
       "Are you sure you want to remove the picture ?"
     );
     if (confirmation) {
-      setProfileImageView(3);
-      setProfileImage(3);
+      Remove_Picture_Cloud();
       return true;
     }
   };
+
+
+  ///// Remove the image from cloudinary use server node.js 
+  const Remove_Picture_Cloud=async()=>{
+    const pic={pic:ProfileImageView}
+    await axios.delete(`${baseUrl}/users/remove_Picture`,{data:pic, headers: {
+      Authorization: `Bearer ${Info_User.token}`
+    }}).then(()=>{
+    setProfileImageView(Math.floor((Math.random() * 5)+1 ));
+    setProfileImage(Math.floor((Math.random() * 5)+1 ));
+    dispatch({
+      type: "succes",
+      payload: { message:'', openSuccess: true },
+    });
+  }).catch((err)=>  dispatch({
+    type: "error",
+    payload: {
+      message: "Server Error Try Again ..!",
+      openError: true,
+    },
+  }));
+  }
+
   return (
     <div className="text-white overscroll-auto ">
       <h2 className="  w-full flex justify-between">

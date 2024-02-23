@@ -62,7 +62,7 @@ return <>
                   <AvatarReactjs
                     name={user.name ? user.name : "user"}
                     fontSize={"large"}
-                    src={`${baseUrl}/users/${user.pic}`}
+                    src={user.pic}
                     width={"50px"}
                     height={"50px"}
                   />

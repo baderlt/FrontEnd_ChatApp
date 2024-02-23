@@ -97,7 +97,7 @@ const Profile_User = (props) => {
               <AvatarReactjs
                 name={props.User?.name ? props.User?.name : "user"}
                 fontSize={"large"}
-                src={`${baseUrl}/users/${props?.User?.pic}`}
+                src={props?.User?.pic}
                 width={"153px"}
                 height={"153px"}
               />

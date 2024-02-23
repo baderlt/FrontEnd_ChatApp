@@ -19,7 +19,7 @@ import DarkMode from "./togle_dark";
 import { colors } from "../touls";
 export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
-  const UserProfilePic = `${baseUrl}/users/${props.info_chat?.pic}`;
+  const UserProfilePic = props.info_chat?.pic;
 
   // const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -132,7 +132,7 @@ SetFilterUsers(us);
                   <AvatarReactjs
                     name={item.name ? item.name : "user"}
                     fontSize={"large"}
-                    src={`${baseUrl}/users/${item.pic}`}
+                    src={item.pic}
                     width={"50px"}
                     height={"50px"}
                   />

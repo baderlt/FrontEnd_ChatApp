@@ -296,7 +296,7 @@ export default function Nav_Bar() {
                             <AvatarReactjs
                               name={Info_User?.name ? Info_User?.name : "user"}
                               fontSize={"small"}
-                              src={`${baseUrl}/users/${Info_User?.pic}`}
+                              src={Info_User?.pic}
                               width={"35px"}
                               height={"35px"}
                             />
