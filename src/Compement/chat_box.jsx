@@ -121,8 +121,7 @@ export default function Chat_Box(props) {
       {props?.info_chat ? (
         <div
           className={`h-screen  main  mr-4  `}
-          style={{ width: "100%", height: "100vh",backgroundImage:toggle ? "url('/bg_chat3_dark.png')" : "url('/bg_chat3.png')" }}
-       >
+          style={{ width: "100%", height: "100vh",backgroundImage:toggle ? "url('/bg_chat3_dark.png')" : "url('/bg_chat3.png')" }}>
           <div
             className={`${
               toggle ? "header_dark" : "bg-white"
