@@ -59,15 +59,13 @@ SetFilterUsers(us);
         JSON.stringify({...Users_Searched})
       );
       /// if the list of users serched >  10 remove one . the max users stocked is 10 
-      if (Users_Searched[Info_User.name].length >= 10) Users_Searched.pop();
+      if (Users_Searched[Info_User.name].length >= 10) Users_Searched[Info_User.name].pop();
       SetCurentUser(user._id);
       /// this requst for test if the user alerdy have a chat with user serched 
      const Has_Chat= await axios.get(`${baseUrl}/Chats/find/${user._id}/${Info_User._id}`,{headers:{Authorization:`bearer ${Info_User.token}` }});
      if(Has_Chat.data.length == 1){
       user={...user,frende:true}
      }
-  
-   
       handleRefrech(); 
       HandleProfile(user);
       HandleLoding(false);

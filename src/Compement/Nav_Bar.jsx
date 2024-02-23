@@ -107,7 +107,7 @@ export default function Nav_Bar() {
   return (
     <div>
       {/* <Drawer anchor="right" transitionDuration={600} open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)}><Profile User={Info_User}/></Drawer> */}
-      <Disclosure as="nav" className="bg-black w-full fixed top-0 left-0">
+      <Disclosure as="nav" className="bg-black z-50 w-full fixed top-0 left-0">
         {({ open }) => (
           <>
             <div className="mx-auto  px-2 sm:px-6 lg:px-8 ">
@@ -134,20 +134,7 @@ export default function Nav_Bar() {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        // <a
-                        //   key={item.name}
-                        //   onClick={()=><Naviga}
-                        //   href={item.href}
-                        //   className={classNames(
-                        //     item.current
-                        //       ? "bg-gray-900 text-white"
-                        //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        //     "rounded-md px-3 py-2 text-sm font-medium"
-                        //   )}
-                        //   aria-current={item.current ? "page" : undefined}
-                        // >
-                        //   {item.name}
-                        // </a>
+                 
                               <NavLink className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`} to={item.href} >
                       
                       {item.name}
@@ -367,20 +354,11 @@ export default function Nav_Bar() {
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
+                
+                                 <NavLink className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'} block   rounded-md px-3 py-2 text-base font-medium`} to={item.href} >
+                      
+                                 {item.name}
+                                         </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>

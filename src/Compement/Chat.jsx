@@ -24,6 +24,7 @@ import Loding_Chat from "./loading_chat";
 import Loading_App from "../Loding/Loading_App";
 import Chat_Box from "./chat_box";
 import { colors } from "../touls";
+import { NavLink } from "react-router-dom";
 export const MessageSnded = createContext(null);
 export default function Chats() {
 
@@ -346,9 +347,14 @@ export default function Chats() {
               <br />
               No chat found ,create your first chat...!{" "}
             </h1>{" "}
-            <button className="bg-blue-600 hover:bg-blue-400 rounded-lg w-40 h-10 mt-10 text-center ">
-              Create Chat
+            <button className="bg-blue-600 hover:bg-blue-400 rounded-lg w-40 h-10 mt-10 text-center " >
+
+          <NavLink  to={'/home/NewChat'} >
+                      
+            Create Chat
+                              </NavLink>
             </button>
+          
           </div>
         ) ):    <Loding_Chat/> } 
    
