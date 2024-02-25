@@ -18,6 +18,8 @@ export const reduseralert=(state=initstate,action)=>{
     break;
     case 'openEdChat':       return {...state,openEdChat:action.payload};
     break;
+    case 'CloseChat':       return {...state,openEdChat:''};
+    break;
     case 'users':         return {...state,Users:action.payload};
     break;
     default :return state;

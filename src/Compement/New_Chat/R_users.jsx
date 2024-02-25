@@ -36,7 +36,7 @@ const RecentUsers=({refrech,handleRefrech,HandleLoding,HandleProfile})=>{
     }
 return <>
 
-        <div className="  flex flex-row gap-2 overflow-x-auto ml-2 p-2 h-28">
+        <div className="  flex flex-row gap-2 overflow-x-auto  p-2 h-28">
 
           { Users_Searched[Info_User.name] && Users_Searched[Info_User.name].length >= 1 ? Users_Searched[Info_User.name].map((user,index)=>{
             return  <span key={index} className="w-20 text-white text-xs hover:bg-gray-800   border border-gray-800 rounded-lg content-center text-center items-center pt-2 pb-2">

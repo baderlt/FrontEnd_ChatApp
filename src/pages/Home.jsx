@@ -8,13 +8,14 @@ import React, { Suspense, createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { baseUrl } from "../touls";
+import { Server_Socket, baseUrl } from "../touls";
 import Drawer_Info from "../Drawer_Profil";
-
+import useSound from 'use-sound';
 import Not_Found from "./Not_Found";
 import Loading_App from "../Loding/Loading_App";
 import Chats from "../Compement/Chat";
 import NewChat from "../Compement/New_Chat/NewChat";
+import Notif_Sound from './notification.wav'
 export const OnlinUserContext = createContext(null);
 
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
@@ -28,7 +29,7 @@ const Home = () => {
   const [onlineUser, SetOnlineUser] = useState();
   const [notifications, SetNotification] = useState([]);
   const openedChat = useSelector((state) => state.alert.openEdChat);
-
+  const [play_notif] = useSound(Notif_Sound);
   /////////////////////////////// updateNotification
 
   const updateNotification = (New_N) => {
@@ -38,7 +39,7 @@ const Home = () => {
   //////////////////////////////////////////////// socket Io
   useEffect(() => {
     const connection_server = async () => {
-      const newSocket = await io("https://socket-y0xj.onrender.com/");
+      const newSocket = await io(Server_Socket);
       SetSocket(newSocket);
     };
     connection_server();
@@ -47,22 +48,27 @@ const Home = () => {
     };
   }, [Info_User]);
 
+
+///////////////////////////////////////////////
+
+
   useEffect(() => {
     if (Socket === null) return;
     Socket.emit("addNewUser", Info_User?._id);
     Socket.on("onlineUser", (res) => {
       SetOnlineUser(res);
     });
-
-    Socket.on("getNotification", (res) => {
+    /////////////// get the notification  from socket on  action getNotification 
+   Socket.on("getNotification", (res) => {
       if (res.senderId === Info_User._id) return;
       const isChatOpen = openedChat?._id === res.senderId;
-
       if (isChatOpen) {
         SetNotification((prev) => [{ ...res, isRead: true }, ...prev]);
         return;
       } else {
+        play_notif();
         SetNotification((pr) => [res, ...pr]);
+        return;
       }
     });
 
@@ -71,30 +77,34 @@ const Home = () => {
       Socket.off("getNotification");
     };
   }, [Socket, openedChat]);
-  ////////////////////////
-  const sendNotificationBeforeUnmount = async () => {
-    try {
-      const Notification_Socket = notifications.filter((item) => item.date);
 
-      if (Notification_Socket.length > 0) {
-        await axios.post(
-          `${baseUrl}/notifications/AddMany`,
-          Notification_Socket,
-          {
-            headers: { Authorization: `Bearer ${Info_User.token}` },
-          }
-        );
-      }
-    } catch (error) {
-      dispatch({
-        type: "error",
-        payload: {
-          message: "Server was shut down, try again!",
-          openError: true,
-        },
-      });
-    }
-  };
+
+  ////////////////////////
+
+
+  // const sendNotificationBeforeUnmount = async () => {
+  //   try {
+  //     const Notification_Socket = notifications.filter((item) => item.date);
+
+  //     if (Notification_Socket.length > 0) {
+  //       await axios.post(
+  //         `${baseUrl}/notifications/AddMany`,
+  //         Notification_Socket,
+  //         {
+  //           headers: { Authorization: `Bearer ${Info_User.token}` },
+  //         }
+  //       );
+  //     }
+  //   } catch (error) {
+  //     dispatch({
+  //       type: "error",
+  //       payload: {
+  //         message: "Server was shut down, try again!",
+  //         openError: true,
+  //       },
+  //     });
+  //   }
+  // };
 
   // sendNotificationBeforeUnmount()
   // console.log(notifications)
@@ -129,10 +139,6 @@ const Home = () => {
       });
 
     //  console.log( window.innerWidth)
-
-    return () => {
-      sendNotificationBeforeUnmount();
-    };
   }, []);
   return (
     <>

@@ -73,9 +73,11 @@ SetFilterUsers(us);
   return (
     <>
     
-      <div class="flex items-center w-full justify-center  text-white">
-        
-        <div class="rounded-lg  w-full mb-2 ">
+      <div class="flex bg-black  flex-col w-full justify-center  text-white">
+      <h2 className="text-xl text-gray-300 flex flex-row gap-2 mb-2 mt-1 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>Search</h2>
+        <div class="rounded-lg relative  w-full mb-2 ">
           <div class="flex w-full">
             <div class="flex w-10 items-center justify-center rounded-tl-lg rounded-bl-lg border-r border-gray-200 bg-gray-700 p-5">
               <svg
@@ -105,7 +107,7 @@ SetFilterUsers(us);
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full  gap-2">
+      <div className="flex flex-col w-full  overflow-y-auto  gap-2" style={{height:'calc(100vh - 165px)'}}>
         {Filter_Users && Filter_Users.length >= 1 ? (
           Filter_Users.map((item, index) => {
             return (

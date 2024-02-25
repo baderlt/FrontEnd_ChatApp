@@ -28,17 +28,28 @@ export default function Chat_Box(props) {
   const All_messages_ =UseGetMessages(props.info_chat, refreche);
   const [message, setmessage] = useState();
   const [newMessage, SetNewMessage] = useState();
-  const [Messages, SetMessages] = useState();
-  const [FilterMessages, SetFilterMessages] = useState();
+  const [Messages, SetMessages] = useState([]);
+  const [FilterMessages, SetFilterMessages] = useState([]);
   const chatRef = useRef();
   const { onlineUser, Socket } = useContext(OnlinUserContext);
   const { handelMessageSended } = useContext(MessageSnded);
+  const openedChat = useSelector((state) => state.alert.openEdChat);
 
   useEffect(() => {
     SetMessages(All_messages_);
     SetFilterMessages(All_messages_);
 
+
   }, [All_messages_]);
+
+
+ ///// this for change the globale stats CHAT OPEN and close thw chat whrn the compoment didmout  
+useEffect(()=>{
+  dispatch({ type: "openEdChat", payload: props.info_chat });
+  return ()=>{
+    dispatch({ type: "CloseChat"});
+  }
+},[openedChat])
 
   ///////////////////////
   const searchMessage = (e) => {
@@ -62,9 +73,23 @@ export default function Chat_Box(props) {
   useEffect(() => {
     if (Socket === null) return;
     Socket.on("getMessage", (res) => {
-      if (props.info_chat?.id_Chat !== res.ChatId) return;
-      SetMessages((prev) => [...prev, res]);
-      SetFilterMessages((prev) => [...prev, res]);
+      if (props.info_chat?.id_Chat !== res.ChatId)      return;
+   
+    
+        if (res) {
+          SetMessages((prev) => {
+            if(prev){
+            return [...prev, res];
+            }
+          });
+          
+          SetFilterMessages((prev) => {
+            if(prev){
+            return [...prev, res];
+            }
+          });
+        
+      }
     });
 
     return () => {
@@ -100,10 +125,6 @@ export default function Chat_Box(props) {
         SetNewMessage(res.data), handelMessageSended();
       })
       .catch((er) => {
-        // console.log(er);
-        // <Navigate to={'/login'}/> 
-        // navigate("/login");
-        // window.location.reload();
         dispatch({
           type: "error",
           payload: { message: "Error server Try agin ..!", openError: true },
@@ -112,16 +133,12 @@ export default function Chat_Box(props) {
   };
   
 
-  function capitalizeFirstLetter(word) {
-    return word[0].toUpperCase() + word.substring(1);
-  }
-
   return (
     <>
       {props?.info_chat ? (
         <div
           className={`h-screen  main  mr-4  `}
-          style={{ width: "100%", height: "100vh",backgroundImage:toggle ? "url('/bg_chat3_dark.png')" : "url('/bg_chat3.png')" }}>
+          style={{ width: "100%", height: "100vh",backgroundImage:toggle ? "url('bg_chat3_dark.png')" : "url('bg_chat3.png')" }}>
           <div
             className={`${
               toggle ? "header_dark" : "bg-white"
@@ -162,7 +179,7 @@ export default function Chat_Box(props) {
               }`}
             >
               <div>
-                <b>{capitalizeFirstLetter(props.info_chat.name)}</b>
+                <b>{props.info_chat.name}</b>
               </div>
               <div>
                 <p className="text-green-600" style={{ fontSize: 10 }}>

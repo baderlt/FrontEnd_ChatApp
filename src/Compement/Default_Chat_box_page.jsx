@@ -3,11 +3,11 @@ const Default_Page=()=>{
         <div
       className="h-screen  text-center  grid  place-content-center bg-gradient-to-tr from-blue-900 to-purple-900  "
       style={{
-        backgroundImage: "URL(/bg_chat3.png)",
+        backgroundImage: "URL(bg_chat3.png)",
       }}
     >
       <img
-        src="/logo_.png"
+        src={'logo_.png'}
         alt="Logo chat"
         class="animate-pulse ml-24 grid  place-content-center  "
       />

@@ -15,7 +15,6 @@ function App() {
  
   const dispatch = useDispatch();
   const globale_State = useSelector((state) => state.alert.composant);
-
   const [isauth, setisauth] = useState(false);
   const check_Auth_User = async () => {
     const info = localStorage.getItem("info_User");

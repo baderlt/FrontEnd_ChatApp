@@ -142,10 +142,8 @@ export default function Chats() {
     setchat_Data(all_chats);
  
   };
-  /////////////////////////////// fo make the first string upperCase
-  const capitalizeFirstLetter = (word) => {
-    return word[0].toUpperCase() + word.substring(1);
-  };
+
+
   ///////////////////////////////// fo filter the chat
   const filter = (e) => {
     let value = e.target.value.toLowerCase();
@@ -161,7 +159,7 @@ export default function Chats() {
       <Suspense fallback={<Loading_App />}>
     <Chat_Box info_chat={item} />
     </Suspense>);
-    dispatch({ type: "openEdChat", payload: item });
+  dispatch({ type: "openEdChat", payload: item });
   }
 
   /////////////////////////////////// for the length of the last message send showed in chat div
@@ -282,7 +280,7 @@ export default function Chats() {
                     <span className="flex flex-row " style={{ width: "100%" }}>
                       <h2 className=" text-white pl-0 col-span-4 basis-1/2 ">
      
-                        &ensp;{capitalizeFirstLetter(item.name)}
+                        &ensp;{item.name}
                       </h2>
                       <p className="text-white  text-xs basis-1/2 text-right ">
                       

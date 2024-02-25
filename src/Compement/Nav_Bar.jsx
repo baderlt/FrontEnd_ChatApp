@@ -128,7 +128,7 @@ export default function Nav_Bar() {
                   <div className="flex flex-shrink-0 items-center">
                     <div
                       class="grid  place-content-center  w-10 h-10   ">
-                     <img src="/logo_.png" alt="logo app wesh" />
+                     <img src="logo_.png"  alt="logo app wesh" />
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
