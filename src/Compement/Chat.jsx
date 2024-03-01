@@ -25,6 +25,7 @@ import Loading_App from "../Loding/Loading_App";
 import Chat_Box from "./chat_box";
 import { colors } from "../touls";
 import { NavLink } from "react-router-dom";
+import Default_Page from "./Default_Chat_box_page";
 export const MessageSnded = createContext(null);
 export default function Chats() {
 
@@ -32,13 +33,15 @@ export default function Chats() {
   const [chat_Data, setchat_Data] = useState();
   const [filter_chat, setfilter_chat] = useState();
   const [selected_item, setSelected_item] = useState();
-  const [chat_box, setchat_box] = useState(<Chat_Box />);
+  const [chat_box, setchat_box] = useState('');
   const [loadingChat, SetLoadingChat] = useState(false);
   const { onlineUser, notifications, updateNotification }=useContext(OnlinUserContext);
 
-  const [send, SetSende] = useState();
+  const [send, SetSende] = useState(true);
   const handelMessageSended = () => {
     SetSende(!send);
+    console.log('sended');
+    return ;
   };
 
   const nbr_Notifications = (senderId) => {
@@ -155,10 +158,7 @@ export default function Chats() {
 
   async function chat_box_info(item) {
     setSelected_item(item.name);
-    setchat_box(
-      <Suspense fallback={<Loading_App />}>
-    <Chat_Box info_chat={item} />
-    </Suspense>);
+    setchat_box({open:true,item:item});
   dispatch({ type: "openEdChat", payload: item });
   }
 
@@ -225,18 +225,18 @@ export default function Chats() {
                 <div
                   className={`p-2 flex flex-nowrap hover:bg-gray-700  border-b-2 mt-1  ${
                     item.name == selected_item
-                      ? "bg-gray-700"
-                      : "border-gray-600/50"
+                    ? "bg-gray-700"
+                    : "border-gray-600/50"
                   }   w-full`}
                   onClick={() => {
                     chat_box_info(item);
                     Filter_Notification(item._id);
                   }}
-                >
+                  >
                   {Number.isInteger(Number(item.pic)) ? (
                     <AvatarReactjs
-                      name={item.name ? item.name : "user"}
-                      fontSize={"large"}
+                    name={item.name ? item.name : "user"}
+                    fontSize={"large"}
                       backgroundColor={
                         Number.isInteger(Number(item.pic))
                           ? colors[item.pic]
@@ -245,16 +245,16 @@ export default function Chats() {
                       fontColor={item.pic == 3 ? "black" : "azure"}
                       width={"50px"}
                       height={"50px"}
-                    />
-                  ) : (
-                    <AvatarReactjs
-                    name={item.name ? item.name : "user"}
-                    fontSize={"large"}
-                    src={item.pic}
-                    width={"50px"}
-                    height={"50px"}
-                  />
-                  )}
+                      />
+                      ) : (
+                        <AvatarReactjs
+                        name={item.name ? item.name : "user"}
+                        fontSize={"large"}
+                        src={item.pic}
+                        width={"50px"}
+                        height={"50px"}
+                        />
+                        )}
 
                   {onlineUser &&
                   onlineUser.some((user) => user.userId === item._id) ? (
@@ -359,9 +359,12 @@ export default function Chats() {
       </div>
      </div>
       <div className="h-screen col-span-2 basis-[70%]  grid mt-12 text-black">
-        <MessageSnded.Provider value={{ handelMessageSended }}>
-          {chat_box}
-        </MessageSnded.Provider>
+        {chat_box?.open ? 
+        <MessageSnded.Provider value={{handelMessageSended}}>
+        <Suspense fallback={<Loading_App />}>
+       <Chat_Box info_chat={chat_box.item} />
+       </Suspense>
+        </MessageSnded.Provider>:<Default_Page/>}
       </div>
     </main>
   );

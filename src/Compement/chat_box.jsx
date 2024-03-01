@@ -11,15 +11,16 @@ import { Time_Date, getDayOrDate } from "./Touls_Date";
 import { MessageSnded } from "./Chat";
 import { useContext } from "react";
 import { OnlinUserContext } from "../pages/Home";
-import { Navigate, useNavigate } from "react-router-dom";
 import UseGetMessages from "../useGetMessages";
 import Messages_Loding from "./Messages_Loding";
 import Default_Page from "./Default_Chat_box_page";
 import DarkMode from "./togle_dark";
 import { colors } from "../touls";
+import { CircularProgress } from "@mui/material";
 export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
   const UserProfilePic = props.info_chat?.pic;
+
 
   // const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,8 +33,9 @@ export default function Chat_Box(props) {
   const [FilterMessages, SetFilterMessages] = useState([]);
   const chatRef = useRef();
   const { onlineUser, Socket } = useContext(OnlinUserContext);
-  const { handelMessageSended } = useContext(MessageSnded);
+  const {handelMessageSended} = useContext(MessageSnded);
   const openedChat = useSelector((state) => state.alert.openEdChat);
+ const [loading_Message_sent,SetLoding_m_sent]=useState(false);
 
   useEffect(() => {
     SetMessages(All_messages_);
@@ -104,12 +106,13 @@ useEffect(()=>{
   }, [Messages, newMessage]);
 
   const sendMessage = async () => {
+    SetLoding_m_sent(true);
     const body = {
       ChatId: props.info_chat?.id_Chat,
       SenderId: Info_User._id,
       message: message,
     };
-    await axios
+     await axios
       .post(
         `${baseUrl}/messages/`,
         { body },
@@ -122,14 +125,21 @@ useEffect(()=>{
         if (onlineUser.some((user) => user.userId != props?.info_chat?._id)) {
           setrefrech(!refreche);
         }
-        SetNewMessage(res.data), handelMessageSended();
+  
+        SetLoding_m_sent(false);
+        SetNewMessage(res.data);
+        // handelMessageSended();
+      handelMessageSended();
       })
       .catch((er) => {
+        console.log(er)
+        SetLoding_m_sent(false);
         dispatch({
           type: "error",
           payload: { message: "Error server Try agin ..!", openError: true },
         });
       });
+ 
   };
   
 
@@ -458,8 +468,9 @@ useEffect(()=>{
                         ? "bg-indigo-500 hover:bg-indigo-600"
                         : "bg-gray-300 "
                     } rounded-xl w-28 text-black px-2 py-1 flex-shrink-0`}
-                    disabled={message == "" ? true : false}
+                    disabled={message == ""  ? true : false}
                   >
+                    {loading_Message_sent ? <CircularProgress size='30px'/> :<span className="flex items-center justify-center">
                     <span>Send</span>
                     <span class="ml-2">
                       <svg
@@ -477,6 +488,8 @@ useEffect(()=>{
                         ></path>
                       </svg>
                     </span>
+                    </span>
+}
                   </button>
                 </div>
               </div>
