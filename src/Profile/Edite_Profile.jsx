@@ -133,6 +133,7 @@ export const Edite_Profile = (props) => {
             type: "succes",
             payload: { message: res.data.message, openSuccess: true },
           });
+          dispatch({ type: "CloseDrawer",  });
           SetSending(false);
           props.closeModal();
           UpdateInfo(res?.data?.user);

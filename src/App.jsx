@@ -16,16 +16,23 @@ function App() {
   const dispatch = useDispatch();
   const globale_State = useSelector((state) => state.alert.composant);
   const [isauth, setisauth] = useState(false);
+
+
+
   const check_Auth_User = async () => {
     const info = localStorage.getItem("info_User");
 
     if (!info) return <Navigate to={"/login"} />;
+ 
+
     const info_decrypted = await import("./EncryptData").then(
       ({ decryptData }) => decryptData(info)
     );
     if (!info_decrypted.isauth) {
+
       return <Navigate to={"login"} />;
     }
+    
     const currentTime = new Date().getTime();
     const dataTimestamp = info_decrypted.timestamp;
     // Calculate the age of the data in milliseconds (1 days = 86 400 000 milliseconds)

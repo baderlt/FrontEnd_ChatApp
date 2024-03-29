@@ -11,22 +11,46 @@ import { useDispatch, useSelector } from "react-redux";
 import Loding_Profile from "./loading.profile";
 import axios from "axios";
 import { useState } from "react";
+import { Box, Modal } from "@mui/material";
+import New_Message from "./New_message";
+import AddNewChat from "./AddNewChat";
+const style = {
+  position: "relative",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+  color:'white',
+  border:'solid 2px gray '
+};
+
+
+
+
+
 const Profile_User = (props) => {
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const links = props?.User?.links ? JSON.parse(props?.User?.links) : null;
   const [chat_Created, setchat_Created] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
+
+/////////// for close modal 
+  const handleClose = () => {
+    setOpenModel(!openModel);
+  };
+
 
   ////// craete new Chat
   const New_Chat = async () => {
     if (props.User.frende) return false;
     try {
       const body = { second_Id: Info_User._id, first_Id: props.User._id };
-      await axios
-        .post(`${baseUrl}/Chats/`, body, {
-          headers: { Authorization: `bearer ${Info_User.token}` },
-        })
-        .then(() => {
+      AddNewChat(body,Info_User.token)
+        .then((res) => {
           dispatch({
             type: "succes",
             payload: {
@@ -47,13 +71,24 @@ const Profile_User = (props) => {
     }
   };
 
-  ///// this function for opening the chat for send messages 
-  const Send_Message=()=>{
-    
-  }
+ 
 
   return (
     <>
+
+<Modal
+        open={openModel}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={style}
+          className="  bg-black w-[100%] md:w-[70%] lg:w-[50%]  rounded-lg"
+        >
+      <New_Message user={props.User} setchat_Created={setchat_Created} handleClose={handleClose}/>
+        </Box>
+      </Modal>
       <h2 className="text-xl text-gray-300 flex flex-row gap-2 mt-2 items-center">
         {" "}
         <svg
@@ -155,7 +190,7 @@ const Profile_User = (props) => {
                 <button
                   className="border bg-gray-900  flex content-center items-center gap-2 p-2  px-4 hover:bg-gray-700"
                   style={{ borderRadius: "4px" }}
-                >
+              onClick={handleClose}  >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

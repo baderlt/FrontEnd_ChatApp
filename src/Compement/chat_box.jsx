@@ -17,6 +17,7 @@ import Default_Page from "./Default_Chat_box_page";
 import DarkMode from "./togle_dark";
 import { colors } from "../touls";
 import { CircularProgress } from "@mui/material";
+import SendMessage from "./New_Chat/SendMessage";
 export default function Chat_Box(props) {
   const [toggle, setToggle] = useState(false);
   const UserProfilePic = props.info_chat?.pic;
@@ -68,6 +69,7 @@ useEffect(()=>{
   useEffect(() => {
     if (Socket === null) return;
     const recipientId = props.info_chat?._id;
+
     Socket.emit("sendMessage", { ...newMessage, recipientId });
   }, [newMessage]);
 
@@ -112,14 +114,7 @@ useEffect(()=>{
       SenderId: Info_User._id,
       message: message,
     };
-     await axios
-      .post(
-        `${baseUrl}/messages/`,
-        { body },
-        {
-          headers: { Authorization: `Bearer ${Info_User.token}` },
-        }
-      )
+   SendMessage(body,Info_User.token)
       .then((res) => {
         setmessage("");
         if (onlineUser.some((user) => user.userId != props?.info_chat?._id)) {
@@ -128,11 +123,10 @@ useEffect(()=>{
   
         SetLoding_m_sent(false);
         SetNewMessage(res.data);
-        // handelMessageSended();
+       
       handelMessageSended();
       })
       .catch((er) => {
-        console.log(er)
         SetLoding_m_sent(false);
         dispatch({
           type: "error",

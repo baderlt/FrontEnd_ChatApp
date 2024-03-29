@@ -40,7 +40,6 @@ export default function Chats() {
   const [send, SetSende] = useState(true);
   const handelMessageSended = () => {
     SetSende(!send);
-    console.log('sended');
     return ;
   };
 
@@ -221,8 +220,7 @@ export default function Chats() {
          filter_chat?.length > 0 ? (
           filter_chat.map((item, index) => {
             return (
-              <div className="pl-2 pr-2  " key={index}>
-                <div
+              <div className="pl-2 pr-2  " key={index}>                <div
                   className={`p-2 flex flex-nowrap hover:bg-gray-700  border-b-2 mt-1  ${
                     item.name == selected_item
                     ? "bg-gray-700"

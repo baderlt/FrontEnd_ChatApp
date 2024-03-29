@@ -1,5 +1,6 @@
 import CryptoJS from 'crypto-js';
  export const decryptData = (encryptedData) => {
+
     try {
        
       const bytes = CryptoJS.AES.decrypt(encryptedData, 'FgK@jsBADER&122003%04');

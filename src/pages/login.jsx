@@ -16,9 +16,10 @@ const Login = () => {
 	const succes_Login=async (data)=>{
 		setisload(true);
 		const data_decrypted=decryptData(data);
+		console.log(data_decrypted);
 		dispatch({type:'isauth',payload:data_decrypted});
 		localStorage.setItem('info_User',data)
-		navigate('/home');
+		navigate('/home/');
 		window.location.reload();
 	}
 

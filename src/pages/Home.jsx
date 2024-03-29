@@ -16,12 +16,14 @@ import Loading_App from "../Loding/Loading_App";
 import Chats from "../Compement/Chat";
 import NewChat from "../Compement/New_Chat/NewChat";
 import Notif_Sound from './notification.wav'
+import useSendNotitication from "../useSendNotitication ";
 export const OnlinUserContext = createContext(null);
 
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
 const Home = () => {
+
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const Profile_Drawer = useSelector((state) => state.Drawer_Profile);
@@ -30,8 +32,12 @@ const Home = () => {
   const [notifications, SetNotification] = useState([]);
   const openedChat = useSelector((state) => state.alert.openEdChat);
   const [play_notif] = useSound(Notif_Sound);
-  /////////////////////////////// updateNotification
 
+
+  ///// inser the notification not read in database 
+  useSendNotitication(notifications,Info_User)
+
+  /////////////////////////////// updateNotification
   const updateNotification = (New_N) => {
     SetNotification(New_N);
   };
