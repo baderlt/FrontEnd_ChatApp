@@ -24,12 +24,19 @@ SetFilterUsers(us);
     const Serched = JSON.parse(localStorage.getItem("searched")) || [];
     if (search_Value.current.value != "") {
       if(!Serched[Info_User.name])Serched[Info_User.name]=[];
+
+      ///// this for delete the value serched like the curent value serched 
+      Serched[Info_User.name]=Serched[Info_User.name].filter((item)=>item != search_Value.current.value);
+      ////// for add the value serched in first place in array 
       Serched[Info_User.name].unshift(search_Value.current.value)
+      ///// mex value serched is 20 
+      if (Serched[Info_User.name].length >= 20) Serched[Info_User.name].pop();
+
       localStorage.setItem(
         "searched",
         JSON.stringify({...Serched})
       );
-        if (Serched[Info_User.name].length >= 10) Serched[Info_User.name].pop();
+
       
       handleRefrech();
   
@@ -48,18 +55,23 @@ SetFilterUsers(us);
     const Users_Searched = JSON.parse(localStorage.getItem("Users_Searched")) || [];
     ///// if the the user authentifed dont have list ibject serched in localstorage 
      if(!Users_Searched[Info_User.name]) Users_Searched[Info_User.name]=[];
+
+
      /////// this for remove  the curent user clicked if alredy in list of object clicked   
       let Users_Filtred=Users_Searched[Info_User.name].filter((item)=>item._id != user._id);
       ///////////// use unshift for add the user serched in the first 
       Users_Filtred.unshift(user)
       // initialiser the new list of users filtred.
       Users_Searched[Info_User.name]=Users_Filtred;
+
+      /// if the list of users serched >  10 remove one . the max users stocked is 10 
+      if (Users_Searched[Info_User.name].length >= 10) Users_Searched[Info_User.name].pop();
+      
       localStorage.setItem(
         "Users_Searched",
         JSON.stringify({...Users_Searched})
       );
-      /// if the list of users serched >  10 remove one . the max users stocked is 10 
-      if (Users_Searched[Info_User.name].length >= 10) Users_Searched[Info_User.name].pop();
+
       SetCurentUser(user._id);
       /// this requst for test if the user alerdy have a chat with user serched 
      const Has_Chat= await axios.get(`${baseUrl}/Chats/find/${user._id}/${Info_User._id}`,{headers:{Authorization:`bearer ${Info_User.token}` }});
