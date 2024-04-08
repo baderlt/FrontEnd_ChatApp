@@ -28,7 +28,6 @@ const style = {
 
 export default function Profile(props) {
   const [openModel, setOpenModel] = useState(false);
-
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const links = props?.User?.links ? JSON.parse(props?.User?.links) : null;
