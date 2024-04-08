@@ -144,13 +144,10 @@ export default function Profile(props) {
             {Info_User._id == props.User?._id ? (
               <button
                 className="bg-green-700 flex-2 row-span-2 rounded-lg hover:bg-green-500 w-[50%] pr-3  pl-3 pt-1 pb-1 ml-[25%] mt-[30%] "
-                onClick={handleClose}
-              >
+                onClick={handleClose}>
                 Edite{" "}
               </button>
-            ) : (
-              ""
-            )}
+            ) : ("")}
           </div>
         </div>
       </div>
