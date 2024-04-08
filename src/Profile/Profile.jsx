@@ -15,6 +15,7 @@ import { Box, Modal } from "@mui/material";
 import { Edite_Profile } from "./Edite_Profile";
 import { baseUrl } from "../touls";
 import { colors } from "../touls";
+
 const style = {
   position: "relative",
   top: "50%",
@@ -26,8 +27,8 @@ const style = {
 };
 
 export default function Profile(props) {
+  
   const [openModel, setOpenModel] = useState(false);
-
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
   const links = props?.User?.links ? JSON.parse(props?.User?.links) : null;
@@ -35,10 +36,12 @@ export default function Profile(props) {
   const Close_Drawer = () => {
     dispatch({ type: "CloseDrawer" });
   };
+  
   const handleClose = () => {
     if (props.User._id != Info_User._id) return false;
     setOpenModel(!openModel);
   };
+  
   return (
     <div className="bg-black w-full h-[100%]  text-white   lg:w-[500px]  md:w-[400px] ">
       <Modal
@@ -59,20 +62,12 @@ export default function Profile(props) {
       </Modal>
       <span
         className="ml-2 pb-2 pt-1 rounded-lg hover:bg-red-600 fixed"
-        onClick={Close_Drawer}
-      >
+        onClick={Close_Drawer} >
         <CloseIcon fontSize="large" color="red" />
       </span>
       <div className="container mx-auto p-8">
         <div className="max-w-md mx-auto  overflow-hidden">
           <div className=" bg-center h-40 p-4 ml-[5%] w-[90%] relative bg-black">
-            {/* User profile picture */}
-            {/* <img
-            src={profileImage }
-            alt="User Profile"
-            className="w-40 h-40 rounded-full mx-auto border-4 border-white absolute top-0 left-0 right-0 bottom-0"
-          /> */}
-
             <div className="w-40 h-40 rounded-full mx-auto border-4 border-white absolute top-0 left-0 right-0 bottom-0">
               {Number.isInteger(Number(props.User?.pic)) ? (
                 <AvatarReactjs
@@ -122,9 +117,7 @@ export default function Profile(props) {
                 <a href={links?.instagram} className=" ">
                   <Instagram fontSize="large" color="error" />
                 </a>
-              ) : (
-                ""
-              )}
+              ) : ("")}
               {links?.facebook ? (
                 <a href={links?.facebook} className="">
                   <FacebookIcon fontSize="large" color="primary" />
@@ -151,13 +144,10 @@ export default function Profile(props) {
             {Info_User._id == props.User?._id ? (
               <button
                 className="bg-green-700 flex-2 row-span-2 rounded-lg hover:bg-green-500 w-[50%] pr-3  pl-3 pt-1 pb-1 ml-[25%] mt-[30%] "
-                onClick={handleClose}
-              >
+                onClick={handleClose}>
                 Edite{" "}
               </button>
-            ) : (
-              ""
-            )}
+            ) : ("")}
           </div>
         </div>
       </div>
