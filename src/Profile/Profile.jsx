@@ -68,13 +68,6 @@ export default function Profile(props) {
       <div className="container mx-auto p-8">
         <div className="max-w-md mx-auto  overflow-hidden">
           <div className=" bg-center h-40 p-4 ml-[5%] w-[90%] relative bg-black">
-            {/* User profile picture */}
-            {/* <img
-            src={profileImage }
-            alt="User Profile"
-            className="w-40 h-40 rounded-full mx-auto border-4 border-white absolute top-0 left-0 right-0 bottom-0"
-          /> */}
-
             <div className="w-40 h-40 rounded-full mx-auto border-4 border-white absolute top-0 left-0 right-0 bottom-0">
               {Number.isInteger(Number(props.User?.pic)) ? (
                 <AvatarReactjs
