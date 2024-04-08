@@ -24,7 +24,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 export default function Profile(props) {
   const [openModel, setOpenModel] = useState(false);
 
