@@ -27,6 +27,7 @@ const style = {
 };
 
 export default function Profile(props) {
+  
   const [openModel, setOpenModel] = useState(false);
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
