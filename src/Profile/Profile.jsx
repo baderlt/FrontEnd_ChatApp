@@ -15,6 +15,7 @@ import { Box, Modal } from "@mui/material";
 import { Edite_Profile } from "./Edite_Profile";
 import { baseUrl } from "../touls";
 import { colors } from "../touls";
+
 const style = {
   position: "relative",
   top: "50%",
@@ -24,6 +25,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 export default function Profile(props) {
   const [openModel, setOpenModel] = useState(false);
 
