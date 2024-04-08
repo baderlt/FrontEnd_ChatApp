@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { baseUrl } from "../touls";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { CircularProgress } from "@mui/material";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Register = () => {
   const Email = useRef("");
   const Password = useRef("");
   const C_Password = useRef("");
+  const [isload,setisload]=useState(false)
   const [err, seterr] = useState({
     username: "",
     email: "",
@@ -35,8 +37,10 @@ const Register = () => {
 
   const handelRegister = async (e) => {
     e.preventDefault();
+    setisload(true);
     if (!able_login) return;
     const success = (res) => {
+      setisload(false);
       setTimeout(() => {
         navigate("/login");
       }, 2000);
@@ -122,7 +126,7 @@ const Register = () => {
   };
   return (
     <>
-      <div class="h-screen md:flex">
+      <div className="h-screen md:flex">
         <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-900 to-purple-900 i justify-around items-center hidden">
           <img src="gif.gif" alt="backgroud" className="w-[60%] h-[60%]" />
 
@@ -169,16 +173,16 @@ const Register = () => {
             />
           </div>
         </div>
-        <div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
-          <form class="bg-white" onSubmit={handelRegister}>
-            <h1 class="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
-            <p class="text-sm font-normal text-gray-600 mb-7">
+        <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
+          <form className="bg-white" onSubmit={handelRegister}>
+            <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
+            <p className="text-sm font-normal text-gray-600 mb-7">
               Welcome To<b> Wesh..!</b>{" "}
             </p>
-            <div class="flex items-center border-2 py-2 px-3 rounded-2xl  ">
+            <div className="flex items-center border-2 py-2 px-3 rounded-2xl  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -191,7 +195,7 @@ const Register = () => {
                 />
               </svg>
               <input
-                class="pl-2 w-72 outline-none border-none"
+                className="pl-2 w-72 outline-none border-none"
                 type="text"
                 name="Username"
                 id=""
@@ -205,10 +209,10 @@ const Register = () => {
               &ensp;{err.username}
             </p>
 
-            <div class="flex items-center border-2 py-2 px-3 rounded-2xl ">
+            <div className="flex items-center border-2 py-2 px-3 rounded-2xl ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -221,7 +225,7 @@ const Register = () => {
                 />
               </svg>
               <input
-                class="pl-2 w-72 outline-none border-none"
+                className="pl-2 w-72 outline-none border-none"
                 type="email"
                 name="Email"
                 id=""
@@ -231,10 +235,10 @@ const Register = () => {
               />
             </div>
             <p className="text-red-700 text-xs  mb-2 "> &ensp;{err.email}</p>
-            <div class="flex items-center border-2 py-2 px-3 rounded-2xl ">
+            <div className="flex items-center border-2 py-2 px-3 rounded-2xl ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -245,7 +249,7 @@ const Register = () => {
                 />
               </svg>
               <input
-                class="pl-2 outline-none w-72 border-none"
+                className="pl-2 outline-none w-72 border-none"
                 type="password"
                 name="Password"
                 id=""
@@ -319,10 +323,10 @@ const Register = () => {
               </div>
             </div>
 
-            <div class={`flex items-center border-2 py-2 px-2 rounded-2xl`}>
+            <div className={`flex items-center border-2 py-2 px-2 rounded-2xl`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -333,7 +337,7 @@ const Register = () => {
                 />
               </svg>
               <input
-                class="pl-2 w-72 outline-none border-none"
+                className="pl-2 w-72 outline-none border-none"
                 type="password"
                 name="C_Password"
                 id=""
@@ -350,14 +354,15 @@ const Register = () => {
 
             <button
               type="submit"
-              class={`block w-full ${
+              className={`block w-full ${
                 able_login ? "bg-indigo-600" : "bg-gray-500"
               } mt-4 py-2 rounded-2xl text-white font-semibold mb-2`}
               disabled={!able_login}
             >
-              Reagister
+              
+              {isload?<CircularProgress size={20} />:'Register'}
             </button>
-            <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">
+            <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
               you already have an account{" "}
               <b>
                 <Link to="/login">Login</Link>

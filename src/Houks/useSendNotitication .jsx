@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { baseUrl } from "./touls";
+import { baseUrl } from "../touls";
 
 
 

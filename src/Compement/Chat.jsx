@@ -1,35 +1,24 @@
 import axios from "axios";
-import React, {
-  Suspense,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { Suspense,createContext, useContext, useEffect, useState,} from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import AvatarReactjs from "avatar-reactjs";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import {
-
-  faPaperPlane,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import {  faPaperPlane,faSearch,} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { baseUrl } from "../touls";
 import { OnlinUserContext } from "../pages/Home";
-
 import moment from "moment";
-import Loding_Chat from "./loading_chat";
+import Loding_Chat from "../Loding/loading_chat";
 import Loading_App from "../Loding/Loading_App";
 import Chat_Box from "./chat_box";
 import { colors } from "../touls";
 import { NavLink } from "react-router-dom";
 import Default_Page from "./Default_Chat_box_page";
 export const MessageSnded = createContext(null);
+
 export default function Chats() {
 
-  const Info_User = useSelector((state) => state.Auth_check.user_Info);
+  const Info_User=useSelector((state) => state.Auth_check.user_Info);
   const [chat_Data, setchat_Data] = useState();
   const [filter_chat, setfilter_chat] = useState();
   const [selected_item, setSelected_item] = useState();
@@ -38,9 +27,10 @@ export default function Chats() {
   const { onlineUser, notifications, updateNotification }=useContext(OnlinUserContext);
 
   const [send, SetSende] = useState(true);
-  const handelMessageSended = () => {
+
+  const handelMessageSended= () => {
     SetSende(!send);
-    return ;
+    return true ;
   };
 
   const nbr_Notifications = (senderId) => {
@@ -191,7 +181,7 @@ export default function Chats() {
           </div>
           <div className="flex-initial w-full   mr-2">
             <div className="inline-flex w-full pl-6 pr-0">
-              <span class="inline-flex  items-center px-3  text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+              <span className="inline-flex  items-center px-3  text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                 <i className="">
                   <FontAwesomeIcon icon={faSearch} />
                 </i>
@@ -199,7 +189,7 @@ export default function Chats() {
               <input
                 type="text"
                 id="website-admin"
-                class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Find a chat ..."
                 onChange={(e) => {
                   filter(e);
@@ -220,7 +210,8 @@ export default function Chats() {
          filter_chat?.length > 0 ? (
           filter_chat.map((item, index) => {
             return (
-              <div className="pl-2 pr-2  " key={index}>                <div
+              <div className="pl-2 pr-2 " key={index}>     
+                 <div
                   className={`p-2 flex flex-nowrap hover:bg-gray-700  border-b-2 mt-1  ${
                     item.name == selected_item
                     ? "bg-gray-700"

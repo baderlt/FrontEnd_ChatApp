@@ -1,13 +1,9 @@
 import { Skeleton } from "@mui/material";
 const Loding_Chat = () => {
-  const Skeltones = Array.from(Array(7)).map(e=><SkelotonElement/>);
-  return Skeltones
- };
- export default Loding_Chat;
- 
-const SkelotonElement=()=>{
-return (
-  <div className="flex flex-nowrap mt-2">
+  const SkeltonesReps = Array.from(Array(7));
+  return <>
+  {SkeltonesReps.map((num,index)=>{
+    return   <div className="flex flex-nowrap mt-2" key={index}>
   <span>
     {" "}
     <Skeleton
@@ -32,5 +28,9 @@ return (
     />
   </span>
 </div>
-)
-}
+  })}
+  </>
+ };
+ export default Loding_Chat;
+ 
+

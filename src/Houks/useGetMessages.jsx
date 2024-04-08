@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { baseUrl } from "./touls";
+import { baseUrl } from "../touls";
 import axios from "axios";
 import { useSelector } from "react-redux";
 

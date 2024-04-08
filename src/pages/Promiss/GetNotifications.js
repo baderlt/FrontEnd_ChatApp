@@ -1,14 +1,15 @@
 import axios from "axios";
 import { baseUrl } from "../../touls";
 
-const AddNewChat = (body, token) => {
+
+const GetNotifications = (token,id) => {
   return new Promise((resolve, reject) => {
      axios
-      .post(`${baseUrl}/Chats/`, body, {
+      .get(`${baseUrl}/notifications/${id}`,  {
         headers: { Authorization: `bearer ${token}` },
       })
       .then((res) => resolve(res))
       .catch((err) => reject(err));
   });
 };
-export default AddNewChat;
+export default GetNotifications;

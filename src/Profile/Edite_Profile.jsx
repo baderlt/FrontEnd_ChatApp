@@ -309,7 +309,7 @@ export const Edite_Profile = (props) => {
         <div className="flex-initial  pt-2   ml-3">
           <div className="inline-flex w-full  h-10  bg-black">
             <span
-              class={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
+              className={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
                 errors.name == "" ? "text-white" : "text-red-500"
               } bg-black border border-r-0 border-gray-300 rounded-l-md dark:bg-black  dark:border-gray-600`}
             >
@@ -320,7 +320,7 @@ export const Edite_Profile = (props) => {
             <input
               type="text"
               id="website-admin"
-              class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Name ...."
               onChange={(e) => {
                 setname(e.target.value);
@@ -335,7 +335,7 @@ export const Edite_Profile = (props) => {
         &ensp; About
         <div className="flex-initial  pt-2   ml-3 ">
           <div className="inline-flex w-full  h-10  bg-black">
-            <span class="inline-flex  items-center px-3  hover:bg-gray-400 text-sm text-white bg-black border border-r-0 border-gray-300 rounded-l-md dark:bg-black  dark:border-gray-600">
+            <span className="inline-flex  items-center px-3  hover:bg-gray-400 text-sm text-white bg-black border border-r-0 border-gray-300 rounded-l-md dark:bg-black  dark:border-gray-600">
               <i className="">
                 <InfoIcon />
               </i>
@@ -343,7 +343,7 @@ export const Edite_Profile = (props) => {
             <input
               type="text"
               id="website-admin"
-              class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="About ...."
               onChange={(e) => {
                 setbio(e.target.value);
@@ -361,7 +361,7 @@ export const Edite_Profile = (props) => {
           <div className="flex-initial  pt-2    ml-3">
             <div className="inline-flex w-full  h-10  bg-black">
               <span
-                class={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
+                className={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
                   errors.links_.instagram == "" ||
                   errors.links_.instagram == undefined
                     ? "text-white"
@@ -375,7 +375,7 @@ export const Edite_Profile = (props) => {
               <input
                 type="text"
                 id="website-admin"
-                class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Instagram link ..."
                 onChange={(e) => {
                   setlinks({ ...links, instagram: e.target.value });
@@ -390,7 +390,7 @@ export const Edite_Profile = (props) => {
           <div className="flex-initial  pt-2  ml-3  ">
             <div className="inline-flex w-full  h-10  bg-black">
               <span
-                class={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
+                className={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
                   errors.links_.facebook == "" ||
                   errors.links_.facebook == undefined
                     ? "text-white"
@@ -404,7 +404,7 @@ export const Edite_Profile = (props) => {
               <input
                 type="text"
                 id="website-admin"
-                class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Facebook link "
                 onChange={(e) => {
                   setlinks({ ...links, facebook: e.target.value });
@@ -418,7 +418,7 @@ export const Edite_Profile = (props) => {
           <div className="flex-initial  pt-2    ml-3">
             <div className="inline-flex w-full  h-10  bg-black">
               <span
-                class={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
+                className={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
                   errors.links_.linkedIn == "" ||
                   errors.links_.linkedIn == undefined
                     ? "text-white"
@@ -432,7 +432,7 @@ export const Edite_Profile = (props) => {
               <input
                 type="text"
                 id="website-admin"
-                class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="LinkedIn link "
                 onChange={(e) => {
                   setlinks({ ...links, linkedIn: e.target.value });
@@ -447,7 +447,7 @@ export const Edite_Profile = (props) => {
           <div className="flex-initial  pt-2    ml-3">
             <div className="inline-flex w-full  h-10  bg-black">
               <span
-                class={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
+                className={`inline-flex  items-center px-3  hover:bg-gray-400 text-sm ${
                   errors.links_.twitter == "" ||
                   errors.links_.twitter == undefined
                     ? "text-white"
@@ -461,7 +461,7 @@ export const Edite_Profile = (props) => {
               <input
                 type="text"
                 id="website-admin"
-                class="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Twitter link"
                 onChange={(e) => {
                   setlinks({ ...links, twitter: e.target.value });

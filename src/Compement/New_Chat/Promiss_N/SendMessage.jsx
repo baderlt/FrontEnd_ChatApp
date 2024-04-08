@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../../touls";
+import { baseUrl } from "../../../touls";
 
 const SendMessage=(data,token)=>{
     return new Promise((resolve, reject) => {

@@ -101,7 +101,7 @@ export default function Profile(props) {
           <div className="p-4 ">
             {/* User information */}
             <h2 className="text-2xl font-semibold mt-6">
-              <FontAwesomeIcon icon={faUser} size="" /> &ensp;{props.User.name}
+              <FontAwesomeIcon icon={faUser}  /> &ensp;{props.User.name}
             </h2>
 
             <h3 className="text-gray-200 mt-10">

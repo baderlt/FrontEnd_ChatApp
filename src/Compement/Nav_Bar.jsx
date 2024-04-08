@@ -127,15 +127,15 @@ export default function Nav_Bar() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex flex-shrink-0 items-center">
                     <div
-                      class="grid  place-content-center  w-10 h-10   ">
+                      className="grid  place-content-center  w-10 h-10   ">
                      <img src="logo_.png"  alt="logo app wesh" />
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
+                      {navigation.map((item,index) => (
                  
-                              <NavLink className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`} to={item.href} >
+                              <NavLink key={index} className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'}`} to={item.href} >
                       
                       {item.name}
                               </NavLink>
@@ -218,9 +218,10 @@ export default function Nav_Bar() {
                         <strong>Notifications</strong>{" "}
                       </AlertTitle>
                       {Notifications_ && Notifications_.length >= 1
-                        ? Notifications_.map((item) => {
+                        ? Notifications_.map((item,index) => {
                             return (
                               <Alert
+                              key={index}
                                 severity="info"
                                 icon={false}
                                 sx={{
@@ -353,9 +354,9 @@ export default function Nav_Bar() {
 
             <Disclosure.Panel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
-                {navigation.map((item) => (
+                {navigation.map((item,index) => (
                 
-                                 <NavLink className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'} block   rounded-md px-3 py-2 text-base font-medium`} to={item.href} >
+                                 <NavLink key={index} className={ ({isActive})=>`rounded-md px-3 py-2 text-sm font-medium ${isActive? 'bg-gray-900 text-white':'text-gray-300 hover:bg-gray-700 hover:text-white'} block   rounded-md px-3 py-2 text-base font-medium`} to={item.href} >
                       
                                  {item.name}
                                          </NavLink>
