@@ -62,8 +62,7 @@ export default function Profile(props) {
       </Modal>
       <span
         className="ml-2 pb-2 pt-1 rounded-lg hover:bg-red-600 fixed"
-        onClick={Close_Drawer}
-      >
+        onClick={Close_Drawer} >
         <CloseIcon fontSize="large" color="red" />
       </span>
       <div className="container mx-auto p-8">
