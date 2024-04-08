@@ -35,6 +35,7 @@ export default function Profile(props) {
   const Close_Drawer = () => {
     dispatch({ type: "CloseDrawer" });
   };
+  
   const handleClose = () => {
     if (props.User._id != Info_User._id) return false;
     setOpenModel(!openModel);
