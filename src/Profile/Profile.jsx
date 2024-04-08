@@ -117,9 +117,7 @@ export default function Profile(props) {
                 <a href={links?.instagram} className=" ">
                   <Instagram fontSize="large" color="error" />
                 </a>
-              ) : (
-                ""
-              )}
+              ) : ("")}
               {links?.facebook ? (
                 <a href={links?.facebook} className="">
                   <FacebookIcon fontSize="large" color="primary" />
