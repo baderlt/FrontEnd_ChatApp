@@ -101,15 +101,12 @@ const Home = () => {
           }
 
       // answerCall(data.from,data.signal);
-
-        },(err)=>{console.log(err)});
-        
+            },(err)=>{console.log(err)});
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // getUserMedia({ video: true, audio: true }).then((stream) => {     
     //     setstream(stream);
     //       MyAudio.current.srcObject= stream;
     //     }).catch((err)=>console.log(err))
-
     //   console.log('dd');
       }
       })
