@@ -87,6 +87,7 @@ const Home = () => {
       if(c){
     
         var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
+        //// mon vedio pour straming
         const Myvedio = document.getElementById("myvedio");
         getUserMedia({
             video: true,
