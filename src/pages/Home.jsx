@@ -97,7 +97,7 @@ const Home = () => {
           setstream(stream_);
       Myvedio.srcObject=stream_;
       
-      
+
        // MyAudio.current.srcObject=stream_;
       // answerCall(data.from,data.signal);
         },(err)=>{console.log(err)});
@@ -111,6 +111,7 @@ const Home = () => {
       }
       })
 
+      
     /////////////// get the notification  from socket on  action getNotification 
    Socket.on("getNotification", (res) => {
       if (res.senderId === Info_User._id) return;
