@@ -87,8 +87,6 @@ const Home = () => {
       if(c){
     
         var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
-   
-        
         const Myvedio = document.getElementById("myvedio");
         getUserMedia({
             video: true,
