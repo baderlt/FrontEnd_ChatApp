@@ -96,7 +96,9 @@ const Home = () => {
         },  (stream_) =>{    
           setstream(stream_);
       Myvedio.srcObject=stream_;
-                    // MyAudio.current.srcObject=stream_;
+      
+      
+       // MyAudio.current.srcObject=stream_;
       // answerCall(data.from,data.signal);
         },(err)=>{console.log(err)});
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
