@@ -92,8 +92,9 @@ const Home = () => {
         const Myvedio = document.getElementById("myvedio");
         getUserMedia({
             video: true,
-            audio: true //optional
+            audio: true 
         },  (stream_) =>{    
+
           setstream(stream_);
           if(stream){
           Myvedio.srcObject=stream_;
