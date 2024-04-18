@@ -87,13 +87,16 @@ const Home = () => {
       if(c){
     
         var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
-        console.log(getUserMedia);
+   
         getUserMedia({
             video: true,
             audio: true //optional
         },  (stream) =>{    
+          setstream(stream);
+          console.log(MyAudio)
+          if(!MyAudio.current) return false; //
           MyAudio.current.srcObject=stream;
-            setstream(stream);
+          answerCall(data.from,data.signal);
         },(err)=>{console.log(err)});
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // getUserMedia({ video: true, audio: true }).then((stream) => {     
