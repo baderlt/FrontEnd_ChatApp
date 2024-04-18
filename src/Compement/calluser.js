@@ -4,12 +4,12 @@ const CallUser=(id,me,name,Socket,handleConnectionRef)=>{
   let stream;
 
   // var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
-  // console.log(getUserMedia);
+   
   // getUserMedia({
   //     video: true,
   //     audio: true //optional
-  // }, (stream) =>{
-  //      stream=stream;
+  // },  (stream_) =>{    
+  // stream=stream_;
   // },(err)=>{console.log(err)});
 
   
@@ -26,7 +26,7 @@ const CallUser=(id,me,name,Socket,handleConnectionRef)=>{
       name: name
     })
   })
-  peer.on("stream", (stream) => {
+  peer.on("stream", (stream_) => {
     
     //   userVideo.current.srcObject = stream
     console.log("straming");

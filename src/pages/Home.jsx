@@ -88,22 +88,23 @@ const Home = () => {
     
         var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
    
+        
+        const Myvedio = document.getElementById("myvedio");
         getUserMedia({
             video: true,
             audio: true //optional
-        },  (stream) =>{    
-          setstream(stream);
-          console.log(MyAudio)
-          if(!MyAudio.current) return false; //
-          MyAudio.current.srcObject=stream;
-          answerCall(data.from,data.signal);
+        },  (stream_) =>{    
+          setstream(stream_);
+      Myvedio.srcObject=stream_;
+                    // MyAudio.current.srcObject=stream_;
+      // answerCall(data.from,data.signal);
         },(err)=>{console.log(err)});
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // getUserMedia({ video: true, audio: true }).then((stream) => {     
     //     setstream(stream);
     //       MyAudio.current.srcObject= stream;
     //     }).catch((err)=>console.log(err))
-    //   answerCall(data.from,data.signal);
+
     //   console.log('dd');
       }
       })
@@ -129,7 +130,7 @@ const Home = () => {
   }, [Socket, openedChat]);
 
   const answerCall =(caller,signal) =>  {
-    
+    MyAudio.current.srcObject=stream;
 		const peer = new SimplePeer({
 			initiator: false,
 			trickle: false,
@@ -182,7 +183,7 @@ const Home = () => {
   return (
     <>
 <div className="absolute">
-{stream &&  <video playsInline muted ref={MyAudio} autoPlay style={{ width: "300px" }} />}
+<video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>
 {callAccepted  ?
 					<video playsInline muted ref={userAudio} autoPlay style={{ width: "300px"}} />:
 					null}
