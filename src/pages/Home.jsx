@@ -184,7 +184,7 @@ const Home = () => {
   return (
     <>
 <div className="absolute">
-<video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>
+ {stream ?  <video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>:""}
 {callAccepted  ?
 					<video playsInline muted ref={userAudio} autoPlay style={{ width: "300px"}} />:
 					null}
