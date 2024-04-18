@@ -95,7 +95,9 @@ const Home = () => {
             audio: true //optional
         },  (stream_) =>{    
           setstream(stream_);
+          if(stream){
           Myvedio.srcObject=stream_;
+          }
        // MyAudio.current.srcObject=stream_;
       // answerCall(data.from,data.signal);
         },(err)=>{console.log(err)});
