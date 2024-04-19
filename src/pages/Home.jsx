@@ -199,7 +199,6 @@ userVedio.current.srcObject=stream_
           },
         });
       });
-
     //  console.log( window.innerWidth)
   }, []);
  
