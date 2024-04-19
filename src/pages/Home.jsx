@@ -84,12 +84,10 @@ const Home = () => {
     ///// accepte the call 
       Socket.on("callUser", (data) => {
         setCallerSignal(data)
-
-
       })
 
-    /////////////// get the notification  from socket on  action getNotification 
-   Socket.on("getNotification", (res) => {
+     /////////////// get the notification  from socket on  action getNotification 
+      Socket.on("getNotification", (res) => {
       if (res.senderId === Info_User._id) return;
       const isChatOpen = openedChat?._id === res.senderId;
       if (isChatOpen) {
