@@ -12,7 +12,6 @@ const CallUser=(id,pic,me,name,Socket,handleConnectionRef)=>{
   stream=stream_;
   },(err)=>{console.log(err)});
 
-  
   const peer = new SimplePeer({
     initiator: true,
     trickle: false,
