@@ -1,1 +1,0 @@
-import{a2 as e}from"./index-9739dd72.js";const o=r=>{try{const a=e.AES.decrypt(r,"FgK@jsBADER&122003%04").toString(e.enc.Utf8);return JSON.parse(a)}catch{return"Decryption failed"}},y=r=>{try{const t=JSON.stringify(r);return e.AES.encrypt(t,"FgK@jsBADER&122003%04").toString()}catch{console.log("encryption error failed to encrypt data")}};export{o as decryptData,y as encryptData};
