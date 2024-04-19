@@ -85,14 +85,7 @@ const Home = () => {
       Socket.on("callUser", (data) => {
         setCallerSignal(data)
 
-      
-    //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    // getUserMedia({ video: true, audio: true }).then((stream) => {     
-    //     setstream(stream);
-    //       MyAudio.current.srcObject= stream;
-    //     }).catch((err)=>console.log(err))
-    //   console.log('dd');
-      // }
+
       })
 
     /////////////// get the notification  from socket on  action getNotification 
