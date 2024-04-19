@@ -110,7 +110,6 @@ const Home = () => {
       // }
       })
 
-
     /////////////// get the notification  from socket on  action getNotification 
    Socket.on("getNotification", (res) => {
       if (res.senderId === Info_User._id) return;
@@ -163,7 +162,7 @@ const Home = () => {
 
     ///// user vedio 
     userVedio.current.srcObject=stream_
-    
+
 		})
 		peer.signal(signal)
 		handleConnectionRef(peer);
