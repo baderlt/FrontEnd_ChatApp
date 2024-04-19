@@ -202,12 +202,13 @@ userVedio.current.srcObject=stream_
     //  console.log( window.innerWidth)
   }, []);
  
-  
+
   ///// decline call;
   const DeclineCall=()=>{
     setCallerSignal(false)
 		connectionRef.current.destroy()
   };
+  
 
   return (
     <>
