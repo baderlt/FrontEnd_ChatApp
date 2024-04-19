@@ -150,7 +150,7 @@ const Home = () => {
     setcallaccepted(true)
     try{
           ///// my vedio streaming
-myvedio.current.srcObject=mystream
+    myvedio.current.srcObject=mystream
 		const peer = new SimplePeer({
 			initiator: false,
 			trickle: false,
@@ -161,8 +161,8 @@ myvedio.current.srcObject=mystream
 		})
 		peer.on("stream", (stream_) => {
 
-///// user vedio 
-userVedio.current.srcObject=stream_
+    ///// user vedio 
+    userVedio.current.srcObject=stream_
 		})
 		peer.signal(signal)
 		handleConnectionRef(peer);
