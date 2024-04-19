@@ -46,7 +46,6 @@ export default function Chat_Box(props) {
   }, [All_messages_]);
 
 
-
 ///// function for call user 
 const callUser = () => {
   let user=onlineUser.filter((user)=>{return user.userId === props.info_chat?._id });
@@ -59,8 +58,8 @@ const callUser = () => {
   return false; 
 }
  CallUser(user[0].socketId,Info_User.pic,My_is_Socket,Info_User.name,Socket,handleConnectionRef);
-
 }
+
  ///// this for change the globale stats CHAT OPEN and close thw chat whrn the compoment didmout  
 useEffect(()=>{
   dispatch({ type: "openEdChat", payload: props.info_chat });
