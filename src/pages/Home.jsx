@@ -171,9 +171,8 @@ userVedio.current.srcObject=stream_
   }
 	}
 
-
+///////////////////////////////////////////////////////////////////////////
   useEffect(() => {
-
     ///// use prommise get users for get all users 
       getUsers(Info_User.token)
       .then((res) => dispatch({ type: "users", payload: res.data }))
@@ -208,7 +207,7 @@ userVedio.current.srcObject=stream_
     setCallerSignal(false)
 		connectionRef.current.destroy()
   };
-  
+
 
   return (
     <>
