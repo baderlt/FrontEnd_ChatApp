@@ -32,13 +32,13 @@ const Home = () => {
   const [notifications, SetNotification] = useState([]);
   const openedChat = useSelector((state) => state.alert.openEdChat);
   const [play_notif] = useSound(Notif_Sound);
-  const [callerSignal,setCallerSignal] = useState()
+  const [callecarSignal,setCallerSignal] = useState()
+  const [callAccepted,setcallaccepted] = useState()
   const userAudio=useRef();
   const MyAudio=useRef();
   const connectionRef= useRef();
   const [stream,setstream]=useState();
-  const [callAccepted,setcallAccepted]=useState(false);
-  
+
   ///// inser the notification not read in database 
   useSendNotitication(notifications,Info_User)
   ///// handel connectionref 
@@ -94,10 +94,9 @@ const Home = () => {
             audio: true 
         },  (stream_) =>{    
 
-          setstream(stream_);
-          if(stream){
-          Myvedio.srcObject=stream_;
-          }
+       setstream(stream_)
+       
+       Myvedio.srcObject=stream_;
 
       // answerCall(data.from,data.signal);
             },(err)=>{console.log(err)});
@@ -132,7 +131,8 @@ const Home = () => {
   }, [Socket, openedChat]);
 
   const answerCall =(caller,signal) =>  {
-    MyAudio.current.srcObject=stream;
+    try{
+    setcallaccepted(true)
 		const peer = new SimplePeer({
 			initiator: false,
 			trickle: false,
@@ -145,8 +145,11 @@ const Home = () => {
 			userAudio.current.srcObject=stream_
 		})
 		peer.signal(signal)
-    setcallAccepted(true)
+   
 		handleConnectionRef(peer);
+  }catch(e){
+    console.log('e');
+  }
 	}
 
 
@@ -184,8 +187,9 @@ const Home = () => {
   
   return (
     <>
-<div className="absolute">
- {stream ?  <video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>:""}
+<div className={`call absolute ${stream ? "":"hidden"}`}>
+
+<video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>
 {callAccepted  ?
 					<video playsInline muted ref={userAudio} autoPlay style={{ width: "300px"}} />:
 					null}

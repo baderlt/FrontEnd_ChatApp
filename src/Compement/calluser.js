@@ -3,14 +3,14 @@ const CallUser=(id,me,name,Socket,handleConnectionRef)=>{
   
   let stream;
 
-  // var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
+  var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
    
-  // getUserMedia({
-  //     video: true,
-  //     audio: true //optional
-  // },  (stream_) =>{    
-  // stream=stream_;
-  // },(err)=>{console.log(err)});
+  getUserMedia({
+      video: true,
+      audio: true //optional
+  },  (stream_) =>{    
+  stream=stream_;
+  },(err)=>{console.log(err)});
 
   
   const peer = new SimplePeer({
