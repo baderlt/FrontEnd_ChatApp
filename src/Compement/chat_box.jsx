@@ -61,9 +61,6 @@ const callUser = () => {
  CallUser(user[0].socketId,Info_User.pic,My_is_Socket,Info_User.name,Socket,handleConnectionRef);
 
 }
-
-
-
  ///// this for change the globale stats CHAT OPEN and close thw chat whrn the compoment didmout  
 useEffect(()=>{
   dispatch({ type: "openEdChat", payload: props.info_chat });
