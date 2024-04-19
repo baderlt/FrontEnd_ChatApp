@@ -58,7 +58,7 @@ const callUser = () => {
   });
   return false; 
 }
- CallUser(user[0].socketId,My_is_Socket,Info_User.name,Socket,handleConnectionRef);
+ CallUser(user[0].socketId,Info_User.pic,My_is_Socket,Info_User.name,Socket,handleConnectionRef);
 
 }
 

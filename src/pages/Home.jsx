@@ -5,7 +5,7 @@ import React, { Suspense, createContext, useEffect, useRef, useState } from "rea
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { Server_Socket, baseUrl } from "../touls";
+import { Server_Socket, baseUrl, colors } from "../touls";
 import Drawer_Info from "../Drawer_Profil";
 import useSound from 'use-sound';
 import Not_Found from "./Not_Found";
@@ -16,6 +16,7 @@ import Notif_Sound from './notification.wav'
 import useSendNotitication from "../Houks/useSendNotitication ";
 import getUsers from "./Promiss/getUsers";
 import GetNotifications from "./Promiss/GetNotifications";
+import AvatarReactjs from "avatar-reactjs";
 export const OnlinUserContext = createContext(null);
 
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
@@ -32,12 +33,13 @@ const Home = () => {
   const [notifications, SetNotification] = useState([]);
   const openedChat = useSelector((state) => state.alert.openEdChat);
   const [play_notif] = useSound(Notif_Sound);
-  const [callecarSignal,setCallerSignal] = useState()
+  // const [calleSignal,setCallerSignal] = useState({pic:"https://res.cloudinary.com/durgqkax8/image/upload/v1708898343/Profile_Pictures/bgjg4spx6jtavx4jotgj.png",name:"baderlt"})
+  const [calleSignal,setCallerSignal] = useState()
   const [callAccepted,setcallaccepted] = useState()
-  const userAudio=useRef();
-  const MyAudio=useRef();
   const connectionRef= useRef();
   const [stream,setstream]=useState();
+  const myvedio=useRef();
+  const userVedio=useRef();
 
   ///// inser the notification not read in database 
   useSendNotitication(notifications,Info_User)
@@ -81,32 +83,31 @@ const Home = () => {
 
     ///// accepte the call 
       Socket.on("callUser", (data) => {
+        setCallerSignal(data)
 
-      console.log('caliinng');
-      let c=confirm(`call from ${data.name}`);
-      if(c){
-    
-        var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
-        //// mon vedio pour straming
-        const Myvedio = document.getElementById("myvedio");
-        getUserMedia({
-            video: true,
-            audio: true 
-        },  (stream_) =>{    
+      // let c=confirm(`call from ${data.name}`);
+      // if(c){
+      //   var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
+      //   //// mon vedio pour straming
 
-       setstream(stream_)
+      //   getUserMedia({
+      //       video: true,
+      //       audio: true 
+      //   },  (stream_) =>{    
+
+      //  setstream(stream_)
        
-       Myvedio.srcObject=stream_;
+      //  Myvedio.current.srcObject=stream_;
 
       // answerCall(data.from,data.signal);
-            },(err)=>{console.log(err)});
+            // },(err)=>{console.log(err)});
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // getUserMedia({ video: true, audio: true }).then((stream) => {     
     //     setstream(stream);
     //       MyAudio.current.srcObject= stream;
     //     }).catch((err)=>console.log(err))
     //   console.log('dd');
-      }
+      // }
       })
 
 
@@ -130,9 +131,26 @@ const Home = () => {
     };
   }, [Socket, openedChat]);
 
-  const answerCall =(caller,signal) =>  {
-    try{
+  //// get userMedia 
+  const HandelUserMedia=()=>{
+        var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
+        //// start my vedio straming 
+        getUserMedia({
+            video: true,
+            audio: true 
+        },  (stream_) =>{    
+       setstream(stream_)
+
+      answerCall(calleSignal.from,calleSignal.signal,stream_);
+            },(err)=>{console.log(err)});
+  }
+
+////////// accept the call ;
+  const answerCall =(caller,signal,mystream) =>  {
     setcallaccepted(true)
+    try{
+          ///// my vedio streaming
+myvedio.current.srcObject=mystream
 		const peer = new SimplePeer({
 			initiator: false,
 			trickle: false,
@@ -142,10 +160,11 @@ const Home = () => {
 			Socket.emit("answerCall", { signal: data, to: caller })
 		})
 		peer.on("stream", (stream_) => {
-			userAudio.current.srcObject=stream_
+
+///// user vedio 
+userVedio.current.srcObject=stream_
 		})
 		peer.signal(signal)
-   
 		handleConnectionRef(peer);
   }catch(e){
     console.log('e');
@@ -183,17 +202,88 @@ const Home = () => {
 
     //  console.log( window.innerWidth)
   }, []);
-
+ 
+  ///// decline call;
+  const DeclineCall=()=>{
+    setCallerSignal(false)
+		connectionRef.current.destroy()
+  };
   
   return (
     <>
-<div className={`call absolute ${stream ? "":"hidden"}`}>
+{calleSignal && !callAccepted? 
+    <div className="caling absolute top-2 left-[42%]  bg-slate-700 z-50 rounded-lg w-[400px]" style={{zIndex:1000}} >
+    <div className="pl-2 pr-2 ">     
+                 <div
+                  className={`p-2 flex flex-nowrap border-b-2 mt-1 border-gray-600/50 w-full`}
+                  >
+                  {Number.isInteger(Number(calleSignal.pic)) ? (
+                    <AvatarReactjs
+                    name={calleSignal.name ?calleSignal.name : "user"}
+                    fontSize={"large"}
+                      backgroundColor={
+                        Number.isInteger(Number(calleSignal.pic))
+                          ? colors[calleSignal.pic]
+                          : "red"
+                      }
+                      fontColor={calleSignal.pic == 3 ? "black" : "azure"}
+                      width={"50px"}
+                      height={"50px"}
+                      />
+                      ) : (
+                        <AvatarReactjs
+                        name={calleSignal.name ?calleSignal.name : "user"}
+                        fontSize={"large"}
+                        src={calleSignal.pic}
+                        width={"50px"}
+                        height={"50px"}
+                        />
+                        )}
 
-<video playsInline muted id="myvedio" autoPlay style={{ width: "300px" }} ></video>
-{callAccepted  ?
-					<video playsInline muted ref={userAudio} autoPlay style={{ width: "300px"}} />:
-					null}
+                
+                  <div className=" w-full grid grid-rows-2 grid-cols-3">
+                    <span className="flex flex-row col-span-2 " style={{ width: "100%" }}>
+                      <h2 className=" text-white pl-0 col-span-4 basis-1/2 ">
+     
+                      &ensp;
+                      &ensp;{calleSignal.name}
+                      </h2>
+                    </span>
+                    <span className="row-span-2 flex justify-between items-center">
+                  <span className="flex justify-center items-center bg-green-500 p-2 rounded-lg " onClick={HandelUserMedia}><img src="call_voice_answer.gif" alt="call accept " width={30} height={30} /></span>
+                  <span className="flex justify-center items-center  bg-red-600 p-2 rounded-lg" onClick={DeclineCall}><img src="call_voice_end.png" alt="call accept " width={30} height={30} /></span>
+
+                  
+                  
+                  </span>
+                    <span className=" col-span-2">
+                      <p
+                        className={` text-gray-300 pl-2   w-full  `}
+                        style={{ width: "100%" }}
+                      >
+        
+        &ensp; voice call .... 
+                    
+                      </p>                    
+                    </span>
+                  </div>
+                </div>
+               
+              </div>
+      
+    </div> 
+    :""}
+<div className={`absolute m-0 pt-0 h-auto flex   bg-gray-200/45 rounded-lg  ${stream ? "":"hidden"}`} style={{zIndex:2000,width:"100%" ,height:"100%"}}>
+{/* {callAccepted  ?<div> */}
+<video playsInline muted ref={myvedio} autoPlay style={{ width: "200px",height:"200px" }} className="absolute left-0 top-0 " ></video>
+
+					<video playsInline muted ref={userVedio} autoPlay   >
+
+          </video>
+          {/* </div>:
+					null} */}
 </div>
+
       <Drawer_Info
         User={Profile_Drawer.User}
         isDrawerOpen={Profile_Drawer.Open}
