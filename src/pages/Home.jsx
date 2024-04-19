@@ -85,22 +85,7 @@ const Home = () => {
       Socket.on("callUser", (data) => {
         setCallerSignal(data)
 
-      // let c=confirm(`call from ${data.name}`);
-      // if(c){
-      //   var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
-      //   //// mon vedio pour straming
-
-      //   getUserMedia({
-      //       video: true,
-      //       audio: true 
-      //   },  (stream_) =>{    
-
-      //  setstream(stream_)
-       
-      //  Myvedio.current.srcObject=stream_;
-
-      // answerCall(data.from,data.signal);
-            // },(err)=>{console.log(err)});
+      
     //     var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     // getUserMedia({ video: true, audio: true }).then((stream) => {     
     //     setstream(stream);
