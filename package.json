@@ -26,6 +26,7 @@
     "avatar-reactjs": "^1.0.5",
     "axios": "^1.5.0",
     "crypto-js": "^4.1.1",
+    "eventemitter3": "^5.0.1",
     "moment": "^2.29.4",
     "peerjs": "^1.5.2",
     "react": "^18.2.0",

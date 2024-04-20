@@ -23,7 +23,7 @@ import getUsers from "./Promiss/getUsers";
 import GetNotifications from "./Promiss/GetNotifications";
 import AvatarReactjs from "avatar-reactjs";
 export const OnlinUserContext = createContext(null);
-
+import Emitter from "../Events/stream_event";
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
@@ -80,7 +80,10 @@ const Home = () => {
     Socket.on("onlineUser", (res) => {
       SetOnlineUser(res);
     });
-
+     /////// if i'm the caller , run my stram 
+     Emitter.on('myStream',(stream_)=>{setstream(stream_);   myvedio.current.srcObject = stream_;});
+     ///// userstream
+     Emitter.on('UserStream',(stream_)=>{setstream(stream_);   userVedio.current.srcObject = stream_;;});
     ///// accepte the call
     Socket.on("callUser", (data) => {
       setCallerSignal(data);
@@ -202,6 +205,7 @@ const Home = () => {
             <div
               className={`p-2 flex flex-nowrap border-b-2 mt-1 border-gray-600/50 w-full`}
             >
+              
               {Number.isInteger(Number(calleSignal.pic)) ? (
                 <AvatarReactjs
                   name={calleSignal.name ? calleSignal.name : "user"}
