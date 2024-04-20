@@ -10,7 +10,6 @@ return (
             <div
               className={`p-2 flex flex-nowrap border-b-2 mt-1 border-gray-600/50 w-full`}
             >
-              
               {Number.isInteger(Number(calingUser.pic)) ? (
                 <AvatarReactjs
                   name={calingUser.name ? calingUser.name : "user"}
