@@ -33,7 +33,6 @@ const Home = () => {
   const [notifications, SetNotification] = useState([]);
   const openedChat = useSelector((state) => state.alert.openEdChat);
   const [play_notif] = useSound(Notif_Sound);
-  // const [calleSignal,setCallerSignal] = useState({pic:"https://res.cloudinary.com/durgqkax8/image/upload/v1708898343/Profile_Pictures/bgjg4spx6jtavx4jotgj.png",name:"baderlt"})
   const [calleSignal,setCallerSignal] = useState()
   const [callAccepted,setcallaccepted] = useState()
   const connectionRef= useRef();
