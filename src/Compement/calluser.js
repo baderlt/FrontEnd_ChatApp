@@ -2,25 +2,25 @@ import Emitter from "../Events/stream_event";
 
 const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
   let stream;
-
+  Emitter.emit("caling", {pic,name});
   var getUserMedia = (
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia
   ).bind(navigator);
 
-  getUserMedia(
-    {
-      video: true,
-      audio: true, 
-    },
-    (stream_) => {
-      stream = stream_;
-    },
-    (err) => {
-      console.log(err);
-    }
-  );
+  // getUserMedia(
+  //   {
+  //     video: true,
+  //     audio: true, 
+  //   },
+  //   (stream_) => {
+  //     stream = stream_;
+  //   },
+  //   (err) => {
+  //     console.log(err);
+  //   }
+  // );
 
   const peer = new SimplePeer({
     initiator: true,
