@@ -1,7 +1,6 @@
 import { colors } from "@mui/material";
 import AvatarReactjs from "avatar-reactjs";
 
-
 const Calling_User=({calingUser,DeclineCall})=>{
 return (
     <div
