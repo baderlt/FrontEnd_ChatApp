@@ -9,18 +9,18 @@ const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
     navigator.mozGetUserMedia
   ).bind(navigator);
 
-  // getUserMedia(
-  //   {
-  //     video: true,
-  //     audio: true, 
-  //   },
-  //   (stream_) => {
-  //     stream = stream_;
-  //   },
-  //   (err) => {
-  //     console.log(err);
-  //   }
-  // );
+  getUserMedia(
+    {
+      video: true,
+      audio: true, 
+    },
+    (stream_) => {
+      stream = stream_;
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
 
   const peer = new SimplePeer({
     initiator: true,
