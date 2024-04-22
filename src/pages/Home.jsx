@@ -65,7 +65,6 @@ const Home = () => {
   }, [Info_User]);
 
   ///////////////////////////////////////////////
-
   useEffect(() => {
     if (Socket === null) return;
     //// get my is socket for use in call user
