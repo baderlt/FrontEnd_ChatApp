@@ -26,8 +26,8 @@ export const OnlinUserContext = createContext(null);
 import Emitter from "../Events/stream_event";
 import Calling_User from "../Compement/caliing_user";
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
-
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
+
 const Home = () => {
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
