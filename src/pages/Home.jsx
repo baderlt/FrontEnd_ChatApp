@@ -173,6 +173,7 @@ const Home = () => {
           },
         });
       });
+	  
     ///// use promiss getNotification for get the notf of user
     GetNotifications(Info_User.token, Info_User._id)
       .then((res) => SetNotification(res.data))
