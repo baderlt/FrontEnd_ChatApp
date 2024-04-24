@@ -194,7 +194,6 @@ const Home = () => {
     connectionRef.current.destroy();
   };
 
-	
   return (
     <>
       {calleSignal && !callAccepted ? (
