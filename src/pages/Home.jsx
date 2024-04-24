@@ -99,7 +99,6 @@ const Home = () => {
         return;
       }
     });
-
     return () => {
       Socket.off("onlineUser");
       Socket.off("getNotification");
