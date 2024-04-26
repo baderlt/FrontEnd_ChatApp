@@ -1,13 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Nav_Bar from "../Compement/Nav_Bar";
-// import Chats from "../Compement/Chat";
-import React, {
-  Suspense,
-  createContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { Suspense, createContext, useEffect, useRef, useState,} from "react";
 import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { Server_Socket, baseUrl, colors } from "../touls";
@@ -27,8 +20,8 @@ import Emitter from "../Events/stream_event";
 import Calling_User from "../Compement/caliing_user";
 import Peer from "simple-peer"
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
-
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
+
 const Home = () => {
   const dispatch = useDispatch();
   const Info_User = useSelector((state) => state.Auth_check.user_Info);
@@ -72,7 +65,6 @@ const Home = () => {
   }, [Info_User]);
 
   ///////////////////////////////////////////////
-
   useEffect(() => {
     if (Socket === null) return;
     //// get my is socket for use in call user
@@ -110,7 +102,6 @@ const Home = () => {
         return;
       }
     });
-
     return () => {
       Socket.off("onlineUser");
       Socket.off("getNotification");
@@ -184,6 +175,7 @@ const Home = () => {
           },
         });
       });
+	  
     ///// use promiss getNotification for get the notf of user
     GetNotifications(Info_User.token, Info_User._id)
       .then((res) => SetNotification(res.data))
