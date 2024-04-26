@@ -1,8 +1,9 @@
 import Emitter from "../Events/stream_event";
+import Peer from "simple-peer"
 
 const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
   let stream;
-  Emitter.emit("caling", {pic,name});
+  Emitter.emit("caling", {pic,name,from:id});
   var getUserMedia = (
     navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
@@ -22,7 +23,7 @@ const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
   //   }
   // );
 
-  const peer = new SimplePeer({
+  const peer = new Peer({
     initiator: true,
     trickle: false,
     stream: stream,

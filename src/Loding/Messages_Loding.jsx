@@ -5,7 +5,7 @@ const Messages_Loding = () => {
 
  return <>
  {numberReps.map((num,index)=>{
-     return <> <div className=" col-start-1 col-end-11 p-0 rounded-lg  " >
+     return < > <div className=" col-start-1 col-end-11 p-0 rounded-lg  " >
         <div className="  w-[100%]">
           
         </div>

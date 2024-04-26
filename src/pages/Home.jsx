@@ -25,6 +25,7 @@ import AvatarReactjs from "avatar-reactjs";
 export const OnlinUserContext = createContext(null);
 import Emitter from "../Events/stream_event";
 import Calling_User from "../Compement/caliing_user";
+import Peer from "simple-peer"
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
@@ -85,13 +86,15 @@ const Home = () => {
 
     ///// when i call a user 
     Emitter.on('caling',(data)=>{SetCalingUser(data)});
+  
      /////// if i'm the caller , run my stram 
     //  Emitter.on('myStream',(stream_)=>{setstream(stream_);   myvedio.current.srcObject = stream_;});
      ///// userstream
-     Emitter.on('UserStream',(stream_)=>{setstream(stream_);   userVedio.current.srcObject = stream_;;});
+     Emitter.on('UserStream',(stream_)=>{  userVedio.current.srcObject = stream_;;});
     ///// accepte the call
     Socket.on("callUser", (data) => {
       setCallerSignal(data);
+    
     });
 
     /////////////// get the notification  from socket on  action getNotification
@@ -142,11 +145,11 @@ const Home = () => {
   ////////// accept the call ;
   const answerCall = (caller, signal, mystream) => {
     setcallaccepted(true);
-    SetCalingUser(false);
+  setCallerSignal(false);
     try {
       ///// my vedio streaming
       myvedio.current.srcObject = mystream;
-      const peer = new SimplePeer({
+      const peer = new Peer({
         initiator: false,
         trickle: false,
         stream: stream,
@@ -198,9 +201,15 @@ const Home = () => {
 
   ///// decline call;
   const DeclineCall = () => {
+  console.log(calleSignal);
+  console.log(calingUser);
+    SetCalingUser(false)
     setCallerSignal(false);
+    Socket.emit("DeclineCall", calleSignal);
     connectionRef.current.destroy();
   };
+
+
 
   return (
     <>
@@ -248,9 +257,9 @@ const Home = () => {
                 </span>
                 <span className="row-span-2 flex justify-between items-center">
                   <span
-                    className="flex justify-center items-center bg-green-500 p-2 rounded-lg "
+                    className="flex justify-center items-center cursor-pointer bg-green-500 p-2 rounded-lg "
                     onClick={HandelUserMedia}
-                  >
+                   >
                     <img
                       src="call_voice_answer.gif"
                       alt="call accept "
@@ -259,7 +268,7 @@ const Home = () => {
                     />
                   </span>
                   <span
-                    className="flex justify-center items-center  bg-red-600 p-2 rounded-lg"
+                    className="flex justify-center items-center cursor-pointer bg-red-600 p-2 rounded-lg"
                     onClick={DeclineCall}
                   >
                     <img

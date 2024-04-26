@@ -28,7 +28,7 @@ const Login = () => {
 	setisload(true);
  await axios.post(`${baseUrl}/users/login`,{email:Email,password:Password})
  .then((res)=>{succes_Login(res.data);setisload(false)})
- .catch(err=>{	dispatch({type:"error",payload:{message:err.response?.data?.message ? err.response?.data?.message :"Server Error Try Again ..!",openError:true}});
+ .catch(err=>{	dispatch({type:"error",payload:{message:err.response?.data?.message ? err.response?.data?.message :"Server Error  Try Again ..!",openError:true}});
  setisload(false)});
 }
     

@@ -236,8 +236,8 @@ const scrolle_to_hight=()=>{
                 </div>
               </div>
             </div>
-            <div className=" basis-[10%] md:basis-[5%] lg:basis-[4%]   hover:bg-purple-200 text-center mt-1.5 pt-1.5 mb-1 pb-1.5 rounded-md  cursor-pointer  " onClick={callUser}>
-              <FontAwesomeIcon icon={faPhone} />
+            <div className=" basis-[10%] md:basis-[5%] lg:basis-[4%] flex justify-center items-center  hover:bg-purple-200 text-center mt-1.5 pt-1.5 mb-1 pb-1.5 rounded-md  cursor-pointer  " onClick={callUser}>
+             <img src="vedioCall.png" alt="Vedio Caall" width={30} />
             </div>
             <button className="basis-[10%] md:basis-[5%] lg:basis-[4%]    hover:bg-purple-200 text-center mt-1.5 pt-1.5 mb-1 pb-1.5 rounded-md mr-6 ">
               <MoreIcon />
