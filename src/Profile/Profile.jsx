@@ -43,7 +43,6 @@ export default function Profile(props) {
     setOpenModel(!openModel);
   };
 
-  
   return (
     <div className="bg-black w-full h-[100%]  text-white   lg:w-[500px]  md:w-[400px] ">
       <Modal
