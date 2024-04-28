@@ -26,6 +26,7 @@ const style = {
   p: 4,
 };
 
+
 export default function Profile(props) {
   
   const [openModel, setOpenModel] = useState(false);
