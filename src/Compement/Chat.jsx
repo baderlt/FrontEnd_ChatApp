@@ -93,7 +93,6 @@ export default function Chats() {
       return false;
     }
   };
-
   /////////////////////////////////////////////////////////////////////////////////////////////
   const getChates = async () => {
     await axios
