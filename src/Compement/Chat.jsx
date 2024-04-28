@@ -17,7 +17,6 @@ import Default_Page from "./Default_Chat_box_page";
 export const MessageSnded = createContext(null);
 
 export default function Chats() {
-
   const Info_User=useSelector((state) => state.Auth_check.user_Info);
   const [chat_Data, setchat_Data] = useState();
   const [filter_chat, setfilter_chat] = useState();
