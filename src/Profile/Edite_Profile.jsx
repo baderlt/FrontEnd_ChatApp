@@ -97,7 +97,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  //////////////////linkdEIn
+  ///// cack is valide linkdEIn
   const LinkdinScan = (e) => {
     if (e == "" || LinkdIn_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, linkedIn: "" } });
