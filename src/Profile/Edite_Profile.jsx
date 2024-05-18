@@ -70,7 +70,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  ////////////////Facebook
+  ////////////chack is valide  Facebook
   const FaccebookScan = (e) => {
     if (e == "" || Facebook_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, facebook: "" } });
