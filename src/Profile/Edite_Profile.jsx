@@ -57,7 +57,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  /////////////////// Instagram
+  //////////// check is valide Instagram
   const inst_Scan = (e) => {
     if (e == "" || inst_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, instagram: "" } });
