@@ -169,6 +169,7 @@ export const Edite_Profile = (props) => {
     localStorage.setItem("info_User",encryptedData);
 
   };
+  /// validation for the data of form
   const Validation = () => {
     let [NamaScan, instScan, FaccebookScan_, LinkdinScan_, twitterScan] = [
       NameValidation(name),
