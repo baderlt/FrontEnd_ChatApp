@@ -110,6 +110,7 @@ export const Edite_Profile = (props) => {
     return false;
   };
 
+  /// update the information user 
   const UpdateInfoProfile = async () => {
     try {
       SetSending(true);
