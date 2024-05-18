@@ -47,7 +47,7 @@ export const Edite_Profile = (props) => {
     linkedIn: props.User?.links?.linkedIn || "",
   });
 
-  ///////////////////////////
+  /////////// check name is valide 
   const NameValidation = (e) => {
     if (e.match(/^[a-zA-Z0-9_]{6,}$/)) {
       seterrors({ ...errors, name: "" });
