@@ -84,7 +84,7 @@ export const Edite_Profile = (props) => {
     }
   };
 
-  //////////////////////// Twiter
+  //////////// check is valide  Twiter
   const TwiterScan = (e) => {
     if (e == "" || Twiter_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, twitter: "" } });
