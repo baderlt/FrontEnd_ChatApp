@@ -153,7 +153,7 @@ export const Edite_Profile = (props) => {
       });
     }
   };
-
+//// update the info of user in localstorage 
   const UpdateInfo = (user) => {
     const info = localStorage.getItem("info_User");
     const info_decrypted = decryptData(info);
