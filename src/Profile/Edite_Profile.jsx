@@ -200,7 +200,7 @@ export const Edite_Profile = (props) => {
       reader.readAsDataURL(file);
     }
   };
-
+  ///// remove the image with use function Remove_Picture_cloud to remove it from server cloud 
   const removeImage = async() => {
     if ( Number.isInteger(Number(ProfileImageView))) {
       alert("You don't have a Picture to remove !");
