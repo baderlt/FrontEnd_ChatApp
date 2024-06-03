@@ -26,6 +26,7 @@ const style = {
   p: 4,
 };
 
+
 export default function Profile(props) {
   
   const [openModel, setOpenModel] = useState(false);
@@ -41,7 +42,7 @@ export default function Profile(props) {
     if (props.User._id != Info_User._id) return false;
     setOpenModel(!openModel);
   };
-  
+
   return (
     <div className="bg-black w-full h-[100%]  text-white   lg:w-[500px]  md:w-[400px] ">
       <Modal

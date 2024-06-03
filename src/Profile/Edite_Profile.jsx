@@ -47,7 +47,7 @@ export const Edite_Profile = (props) => {
     linkedIn: props.User?.links?.linkedIn || "",
   });
 
-  ///////////////////////////
+  /////////// check name is valide 
   const NameValidation = (e) => {
     if (e.match(/^[a-zA-Z0-9_]{6,}$/)) {
       seterrors({ ...errors, name: "" });
@@ -57,7 +57,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  /////////////////// Instagram
+  //////////// check is valide Instagram
   const inst_Scan = (e) => {
     if (e == "" || inst_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, instagram: "" } });
@@ -70,7 +70,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  ////////////////Facebook
+  ////////////chack is valide  Facebook
   const FaccebookScan = (e) => {
     if (e == "" || Facebook_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, facebook: "" } });
@@ -84,7 +84,7 @@ export const Edite_Profile = (props) => {
     }
   };
 
-  //////////////////////// Twiter
+  //////////// check is valide  Twiter
   const TwiterScan = (e) => {
     if (e == "" || Twiter_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, twitter: "" } });
@@ -97,7 +97,7 @@ export const Edite_Profile = (props) => {
       return false;
     }
   };
-  //////////////////linkdEIn
+  ///// cack is valide linkdEIn
   const LinkdinScan = (e) => {
     if (e == "" || LinkdIn_regex.test(e)) {
       seterrors({ ...errors, links_: { ...errors.links_, linkedIn: "" } });
@@ -110,6 +110,7 @@ export const Edite_Profile = (props) => {
     return false;
   };
 
+  /// update the information user 
   const UpdateInfoProfile = async () => {
     try {
       SetSending(true);
@@ -152,7 +153,7 @@ export const Edite_Profile = (props) => {
       });
     }
   };
-
+//// update the info of user in localstorage 
   const UpdateInfo = (user) => {
     const info = localStorage.getItem("info_User");
     const info_decrypted = decryptData(info);
@@ -168,6 +169,7 @@ export const Edite_Profile = (props) => {
     localStorage.setItem("info_User",encryptedData);
 
   };
+  /// validation for the data of form
   const Validation = () => {
     let [NamaScan, instScan, FaccebookScan_, LinkdinScan_, twitterScan] = [
       NameValidation(name),
@@ -198,7 +200,7 @@ export const Edite_Profile = (props) => {
       reader.readAsDataURL(file);
     }
   };
-
+  ///// remove the image with use function Remove_Picture_cloud to remove it from server cloud 
   const removeImage = async() => {
     if ( Number.isInteger(Number(ProfileImageView))) {
       alert("You don't have a Picture to remove !");
