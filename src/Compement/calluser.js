@@ -1,5 +1,5 @@
 import Emitter from "../Events/stream_event";
-import Peer from "simple-peer"
+// import Peer from "simple-peer"
 
 const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
   let stream;
@@ -23,7 +23,7 @@ const CallUser = (id, pic, me, name, Socket, handleConnectionRef) => {
   //   }
   // );
 
-  const peer = new Peer({
+  const peer = new SimplePeer({
     initiator: true,
     trickle: false,
     stream: stream,

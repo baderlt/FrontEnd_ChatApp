@@ -18,7 +18,7 @@ import AvatarReactjs from "avatar-reactjs";
 export const OnlinUserContext = createContext(null);
 import Emitter from "../Events/stream_event";
 import Calling_User from "../Compement/caliing_user";
-import Peer from "simple-peer"
+// import Peer from "simple-peer"
 //  const Lazy_chats=React.lazy(()=>{ import("../Compement/Chat") })
 // const Lazy_chats = React.lazy(() => import("../Compement/Chat"));
 
@@ -140,7 +140,7 @@ const Home = () => {
     try {
       ///// my vedio streaming
       myvedio.current.srcObject = mystream;
-      const peer = new Peer({
+      const peer = new SimplePeer({
         initiator: false,
         trickle: false,
         stream: stream,
@@ -148,7 +148,7 @@ const Home = () => {
       peer.on("signal", (data) => {
         Socket.emit("answerCall", { signal: data, to: caller });
       });
-      console.log('hii')
+
       peer.on("stream", (stream_) => {
         ///// user vedio
         console.log(stream_);
@@ -193,8 +193,6 @@ const Home = () => {
 
   ///// decline call;
   const DeclineCall = () => {
-  console.log(calleSignal);
-  console.log(calingUser);
     SetCalingUser(false)
     setCallerSignal(false);
     Socket.emit("DeclineCall", calleSignal);

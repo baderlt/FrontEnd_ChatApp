@@ -52,6 +52,7 @@ const Register = () => {
     };
     if (!Username.current.value.match(/^[a-zA-Z0-9_]{6,}$/)) {
       seterr({ ...err, username: "Type a Valide Username !" });
+      setisload(false);
       return 0;
     }
     if (
@@ -60,10 +61,13 @@ const Register = () => {
       )
     ) {
       seterr({ ...err, username: "Type a Valide Email !" });
+      setisload(false);
       return 0;
+      
     }
     if (Password.current.value != C_Password.current.value) {
       seterr({ ...err, C_Password: "You must confirm the password!" });
+      setisload(false);
       return 0;
     }
     await axios
@@ -121,7 +125,7 @@ const Register = () => {
     } else {
       Confimation_Pass = true;
     }
-    console.log(Confimation_Pass);
+
     return;
   };
   return (
@@ -235,7 +239,7 @@ const Register = () => {
               />
             </div>
             <p className="text-red-700 text-xs  mb-2 "> &ensp;{err.email}</p>
-            <div className="flex items-center border-2 py-2 px-3 rounded-2xl ">
+            <div className="flex items-center border-2 mb-6 py-2 px-3 rounded-2xl ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-gray-400"
@@ -260,7 +264,7 @@ const Register = () => {
                 required
               />
             </div>
-            <div className="m-4">
+            <div className={`m-4 ${Password.current.value == "" ? "hidden" : ""}`}>
               <div
                 className={`${
                   Password_case.lower ? "text-green-600" : "text-red-500"
@@ -323,7 +327,8 @@ const Register = () => {
               </div>
             </div>
 
-            <div className={`flex items-center border-2 py-2 px-2 rounded-2xl`}>
+            <div className={`flex items-center border-2 py-2 px-2 rounded-2xl `}>
+
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 text-gray-400"
