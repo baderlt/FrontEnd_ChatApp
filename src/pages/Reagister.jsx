@@ -264,7 +264,8 @@ const Register = () => {
                 required
               />
             </div>
-            <div className={`m-4 ${Password.current.value == "" ? "hidden" : ""}`}>
+            <div className={`m-4 ${Password.current.value == "" || undefined ? "hidden" : ""} `}> 
+     
               <div
                 className={`${
                   Password_case.lower ? "text-green-600" : "text-red-500"
