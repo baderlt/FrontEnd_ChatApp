@@ -7,7 +7,7 @@ import Loading_App from "./Loding/Loading_App";
 
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyLogin = React.lazy(() => import("./pages/login"));
-const LazyRegister = React.lazy(() => import("./pages/Reagister"));
+const LazyRegister = React.lazy(() => import("./pages/Register/Main_Register"));
 
 function App() {
   const dispatch = useDispatch();

@@ -2,21 +2,19 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { baseUrl } from "../touls";
+import { baseUrl } from "../../touls";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { CircularProgress } from "@mui/material";
-const Register = () => {
+const RegisterSteptwo = ({email}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const Username = useRef("");
-  const Email = useRef("");
   const Password = useRef("");
   const C_Password = useRef("");
   const [isload,setisload]=useState(false)
   const [err, seterr] = useState({
     username: "",
-    email: "",
     password: "",
     C_Password: "",
   });
@@ -55,16 +53,6 @@ const Register = () => {
       setisload(false);
       return 0;
     }
-    if (
-      !Email.current.value.match(
-        /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/
-      )
-    ) {
-      seterr({ ...err, username: "Type a Valide Email !" });
-      setisload(false);
-      return 0;
-      
-    }
     if (Password.current.value != C_Password.current.value) {
       seterr({ ...err, C_Password: "You must confirm the password!" });
       setisload(false);
@@ -73,7 +61,7 @@ const Register = () => {
     await axios
       .post(`${baseUrl}/users/register`, {
         name: Username.current.value,
-        email: Email.current.value,
+        email:email,
         password: Password.current.value,
         C_Password: C_Password.current.value,
       })
@@ -130,59 +118,14 @@ const Register = () => {
   };
   return (
     <>
-      <div className="h-screen md:flex">
-        <div className="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-900 to-purple-900 i justify-around items-center hidden">
-          <img src="gif.gif" alt="backgroud" className="w-[60%] h-[60%]" />
 
-          <div className="  absolute bottom-[30%] left-[80%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-          <div className="  absolute bottom-[60%] left-[30%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-          <div className="  absolute bottom-[20%] left-[10%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-          <div className="  absolute bottom-[5%] left-[70%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-          <div className="  absolute bottom-[80%] left-[70%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-          <div className="  absolute bottom-[70%] left-[10%]  ">
-            <img
-              src="logo_.png"
-              className="w-[40%] h-[40%]"
-              alt="logo chat app"
-            />
-          </div>
-        </div>
-        <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
           <form className="bg-white" onSubmit={handelRegister}>
-            <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello !</h1>
-            <p className="text-sm font-normal text-gray-600 mb-7">
-              Welcome To<b> Wesh..!</b>{" "}
-            </p>
+          <h1 className="text-gray-800 font-bold text-2xl flex justify-center items-center mb-1">
+          <img src="logo_.png" alt="logo wesh" width={70} />
+        </h1>
+        <p className="flex justify-center items-center font-normal text-xl text-gray-600 mb-7">
+          Welcome To <b> Wesh..!</b>{" "}
+        </p>
             <div className="flex items-center border-2 py-2 px-3 rounded-2xl  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -213,32 +156,7 @@ const Register = () => {
               &ensp;{err.username}
             </p>
 
-            <div className="flex items-center border-2 py-2 px-3 rounded-2xl ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                />
-              </svg>
-              <input
-                className="pl-2 w-72 outline-none border-none"
-                type="email"
-                name="Email"
-                id=""
-                placeholder="Email Address"
-                ref={Email}
-                required
-              />
-            </div>
-            <p className="text-red-700 text-xs  mb-2 "> &ensp;{err.email}</p>
+     
             <div className="flex items-center border-2 mb-6 py-2 px-3 rounded-2xl ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -264,7 +182,7 @@ const Register = () => {
                 required
               />
             </div>
-            <div className={`m-4 ${Password.current.value == "" || undefined ? "hidden" : ""} `}> 
+            <div className={`m-4 ${Password.current.value == "" || Password.current.value == undefined ? "hidden" : ""} `}> 
      
               <div
                 className={`${
@@ -369,17 +287,17 @@ const Register = () => {
               {isload?<CircularProgress size={20} />:'Register'}
             </button>
             <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
+            <Link to="/login">
               you already have an account{" "}
               <b>
-                <Link to="/login">Login</Link>
+               Login
               </b>{" "}
-              ?
+              ?</Link>
             </span>
           </form>
-        </div>
-      </div>
+    
     </>
   );
 };
 
-export default Register;
+export default RegisterSteptwo;
