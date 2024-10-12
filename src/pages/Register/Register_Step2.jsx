@@ -31,7 +31,6 @@ const RegisterSteptwo = ({email}) => {
     Password_case.num &&
     Password_case.char &&
     Password_case.special;
-  let Confimation_Pass = false;
 
   const handelRegister = async (e) => {
     e.preventDefault();
@@ -107,15 +106,7 @@ const RegisterSteptwo = ({email}) => {
     return;
   };
 
-  const check_pass = (value) => {
-    if (value != Password.current.value) {
-      Confimation_Pass = false;
-    } else {
-      Confimation_Pass = true;
-    }
 
-    return;
-  };
   return (
     <>
 

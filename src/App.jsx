@@ -4,6 +4,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Loading_App from "./Loding/Loading_App";
+import ForgotPassword from "./pages/Password_Destroy/ForgotPassword";
+import ResetPassword from "./pages/Password_Destroy/ResetPassword";
 
 const LazyHome = React.lazy(() => import("./pages/Home"));
 const LazyLogin = React.lazy(() => import("./pages/login"));
@@ -13,21 +15,19 @@ function App() {
   const dispatch = useDispatch();
   const globale_State = useSelector((state) => state.alert.composant);
   const [isauth, setisauth] = useState(false);
- 
+
   const check_Auth_User = async () => {
     const info = localStorage.getItem("info_User");
 
     if (!info) return <Navigate to={"/login"} />;
- 
 
     const info_decrypted = await import("./EncryptData").then(
       ({ decryptData }) => decryptData(info)
     );
     if (!info_decrypted.isauth) {
-
       return <Navigate to={"login"} />;
     }
-    
+
     const currentTime = new Date().getTime();
     const dataTimestamp = info_decrypted.timestamp;
     // Calculate the age of the data in milliseconds (1 days = 86 400 000 milliseconds)
@@ -49,7 +49,6 @@ function App() {
   return (
     <>
       {globale_State}
-      
 
       <Routes>
         <Route
@@ -79,7 +78,24 @@ function App() {
             </Suspense>
           }
         />
-     
+        <Route
+          path={"/ForgotPassword"}
+          element={
+            <Suspense fallback={<Loading_App />}>
+              <ForgotPassword />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path={"/ResetPassword/:token"}
+          element={
+            <Suspense fallback={<Loading_App />}>
+              <ResetPassword />
+            </Suspense>
+          }
+        />
+
         <Route
           path="*"
           element={
