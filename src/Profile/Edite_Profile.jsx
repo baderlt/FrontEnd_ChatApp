@@ -321,7 +321,7 @@ export const Edite_Profile = (props) => {
             </span>
             <input
               type="text"
-              id="website-admin"
+              id="website"
               className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Name ...."
               onChange={(e) => {
@@ -344,7 +344,7 @@ export const Edite_Profile = (props) => {
             </span>
             <input
               type="text"
-              id="website-admin"
+              id="website-admin66"
               className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="About ...."
               onChange={(e) => {
@@ -376,7 +376,7 @@ export const Edite_Profile = (props) => {
               </span>
               <input
                 type="text"
-                id="website-admin"
+                id="website-admin2"
                 className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Instagram link ..."
                 onChange={(e) => {
@@ -405,7 +405,7 @@ export const Edite_Profile = (props) => {
               </span>
               <input
                 type="text"
-                id="website-admin"
+                id="website-admin3"
                 className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Facebook link "
                 onChange={(e) => {
@@ -433,7 +433,7 @@ export const Edite_Profile = (props) => {
               </span>
               <input
                 type="text"
-                id="website-admin"
+                id="website-admin5"
                 className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="LinkedIn link "
                 onChange={(e) => {
@@ -462,7 +462,7 @@ export const Edite_Profile = (props) => {
               </span>
               <input
                 type="text"
-                id="website-admin"
+                id="website-admin6"
                 className="rounded-none rounded-r-md bg-black   border text-white focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-1   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Twitter link"
                 onChange={(e) => {
